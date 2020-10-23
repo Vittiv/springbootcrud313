@@ -52,7 +52,7 @@ public class AdminController {
             roleSet.add(userService.getRoleByName(roles));
         }
         userService.updateUser(new User(username, password, roleSet));
-        return "admin/users";
+        return "redirect:users";
     }
 
     //
@@ -73,7 +73,7 @@ public class AdminController {
             roleSet.add(userService.getRoleByName(roles));
         }
         userService.updateUser(new User(id, username, password, roleSet ));
-        return "redirect:admin/users";
+        return "redirect:users";
     }
 
     //
@@ -81,7 +81,7 @@ public class AdminController {
     public String deleteUser(@RequestParam(value = "id") String id) {
         Long userId = Long.parseLong(id);
         userService.deleteUser(userId);
-        return "admin/users";
+        return "redirect:users";
     }
 }
 
