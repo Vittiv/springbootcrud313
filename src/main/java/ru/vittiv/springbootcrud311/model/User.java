@@ -85,14 +85,14 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public void setRoleById(int id) {
-        switch (id){
-            case 1: this.setRoles(Role.USER);
-            case 2: this.setRoles(Role.ADMIN);
-            case 3: this.setRoles(Role.FULL_SET);
-            default: this.setRoles(Role.GUEST);
-        }
-    }
+//    public void setRoleById(int id) {
+//        switch (id){
+//            case 1: this.setRoles(Role.USER);
+//            case 2: this.setRoles(Role.ADMIN);
+//            case 3: this.setRoles(Role.FULL_SET);
+//            default: this.setRoles(Role.GUEST);
+//        }
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

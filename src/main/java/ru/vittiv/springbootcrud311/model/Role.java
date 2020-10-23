@@ -29,14 +29,14 @@ public class Role implements GrantedAuthority {
     public static final Role ROLE_ADMIN = new Role(2,"ROLE_ADMIN");
     public static final Role ROLE_GUEST = new Role(4,"ROLE_GUEST");
 
-    public static final Set<Role> FULL_SET = Stream.of(ROLE_USER, ROLE_ADMIN)
-                                              .collect(Collectors.toCollection(HashSet::new));
-    public static final Set<Role> ADMIN = Stream.of(ROLE_ADMIN)
-            .collect(Collectors.toCollection(HashSet::new));
-    public static final Set<Role> USER = Stream.of(ROLE_USER)
-            .collect(Collectors.toCollection(HashSet::new));
-    public static final Set<Role> GUEST = Stream.of(ROLE_GUEST)
-            .collect(Collectors.toCollection(HashSet::new));
+//    public static final Set<Role> FULL_SET = Stream.of(ROLE_USER, ROLE_ADMIN)
+//                                              .collect(Collectors.toCollection(HashSet::new));
+//    public static final Set<Role> ADMIN = Stream.of(ROLE_ADMIN)
+//            .collect(Collectors.toCollection(HashSet::new));
+//    public static final Set<Role> USER = Stream.of(ROLE_USER)
+//            .collect(Collectors.toCollection(HashSet::new));
+//    public static final Set<Role> GUEST = Stream.of(ROLE_GUEST)
+//            .collect(Collectors.toCollection(HashSet::new));
 
     public Role() {
     }
