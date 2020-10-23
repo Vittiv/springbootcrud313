@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+
+    <form method="POST"  action="create" >
+        <h2 >Create your account</h2>
+                <input type="text" name="username"  placeholder="Username"
+                            autofocus="true">
+                <input type="password" name="password"  placeholder="Password">
+                <select multiple size="2" name="roles" >
+                    <option value="ROLE_ADMIN">ADMIN</option>
+                    <option selected="selected" value="ROLE_USER" >USER</option>
+                </select>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
