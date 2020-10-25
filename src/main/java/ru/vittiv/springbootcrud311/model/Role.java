@@ -19,24 +19,26 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column
+    @Column(unique = true)
     String name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    public static final Role ROLE_USER = new Role(1, "ROLE_USER");
-    public static final Role ROLE_ADMIN = new Role(2,"ROLE_ADMIN");
+
+    public static final Role ROLE_ADMIN = new Role(1,"ROLE_ADMIN");
+    public static final Role ROLE_USER = new Role(2, "ROLE_USER");
     public static final Role ROLE_GUEST = new Role(4,"ROLE_GUEST");
 
-//    public static final Set<Role> FULL_SET = Stream.of(ROLE_USER, ROLE_ADMIN)
-//                                              .collect(Collectors.toCollection(HashSet::new));
-//    public static final Set<Role> ADMIN = Stream.of(ROLE_ADMIN)
-//            .collect(Collectors.toCollection(HashSet::new));
-//    public static final Set<Role> USER = Stream.of(ROLE_USER)
-//            .collect(Collectors.toCollection(HashSet::new));
-//    public static final Set<Role> GUEST = Stream.of(ROLE_GUEST)
-//            .collect(Collectors.toCollection(HashSet::new));
+
+    public static final Set<Role> FULL_SET = Stream.of(ROLE_USER, ROLE_ADMIN)
+                                              .collect(Collectors.toCollection(HashSet::new));
+    public static final Set<Role> ADMIN = Stream.of(ROLE_ADMIN)
+            .collect(Collectors.toCollection(HashSet::new));
+    public static final Set<Role> USER = Stream.of(ROLE_USER)
+            .collect(Collectors.toCollection(HashSet::new));
+    public static final Set<Role> GUEST = Stream.of(ROLE_GUEST)
+            .collect(Collectors.toCollection(HashSet::new));
 
     public Role() {
     }
@@ -55,14 +57,19 @@ public class Role implements GrantedAuthority {
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
+
+        if (getName().equals(ROLE_ADMIN.name)){ this.id = 1L;}
+        else if (getName().equals(ROLE_USER.name)){ this.id = 2L;}
+
+        }
+
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 

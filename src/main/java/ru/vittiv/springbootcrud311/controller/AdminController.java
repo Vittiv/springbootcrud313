@@ -38,20 +38,20 @@ public class AdminController {
     }
 
     //
-    @GetMapping(value = "/newUser")
+    @GetMapping("/newUser")
     public String getUser() {
         return "admin/addUser";
     }
 
-    @PostMapping(value = "new")
-    public String addNewUser(@RequestParam(value = "username") String username,
-                             @RequestParam(value = "password") String password,
-                             @RequestParam("role") String[] role) {
+    @PostMapping("/create")
+    public String createNewUser(@ModelAttribute User user,
+                                @RequestParam("role") String[] roles) {
         Set<Role> roleSet = new HashSet<>();
-        for (String roles : role) {
-            roleSet.add(userService.getRoleByName(roles));
+        for (String role : roles) {
+            roleSet.add(userService.getRoleByName(role));
         }
-        userService.updateUser(new User(username, password, roleSet));
+        user.setRoles(roleSet);
+        userService.updateUser(user);
         return "redirect:users";
     }
 
