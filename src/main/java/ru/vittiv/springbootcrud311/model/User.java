@@ -103,6 +103,18 @@ public class User implements UserDetails {
     }
 
 //    public void setRoleById(int id) {
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
 //        switch (id){
 //            case 1: this.setRoles(Role.USER);
 //            case 2: this.setRoles(Role.ADMIN);

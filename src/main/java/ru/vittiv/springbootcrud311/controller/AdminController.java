@@ -29,6 +29,12 @@ public class AdminController {
         return "admin/users";
     }
 
+    @GetMapping("/dashboard")
+    public String dashboard(ModelMap model) {
+        model.addAttribute("users", userService.getAllUsers());
+        return "admin/dashboard";
+    }
+
     @GetMapping(value = "/hello")
     public String printUserInfo(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

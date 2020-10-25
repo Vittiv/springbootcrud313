@@ -12,12 +12,11 @@
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">with role</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" ><b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b> with role <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b> </a>
     <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Logout</a>
-        </li>
+        <form th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout"/>
+        </form>
     </ul>
 </nav>
 <div class="container-fluid">
@@ -49,10 +48,6 @@
 <!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
 <!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>-->
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                        This week
-                    </button>
                 </div>
             </div>
 
@@ -80,13 +75,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                    </tr>
+                    <th:block th:each="user : ${users}">
+                        <tr>
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.firstName}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.getRoles()}"></td>
+                            <td>
+                                <a th:href="@{edit(id=${user.id})}">Edit</a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a th:href="@{delete(id=${user.id})}">Delete</a>
+                            </td>
+                        </tr>
+                    </th:block>
                     </tbody>
                 </table>
             </div>
