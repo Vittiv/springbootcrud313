@@ -1,4 +1,4 @@
-package ru.vittiv.springbootcrud311.service;
+package ru.vittiv.springbootcrud312.service;
 
 public interface SecurityService {
 

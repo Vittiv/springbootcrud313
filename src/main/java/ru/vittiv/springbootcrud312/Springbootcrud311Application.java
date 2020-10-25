@@ -1,8 +1,7 @@
-package ru.vittiv.springbootcrud311;
+package ru.vittiv.springbootcrud312;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.vittiv.springbootcrud311.model.Role;
 
 @SpringBootApplication
 public class Springbootcrud311Application {

@@ -1,4 +1,4 @@
-package ru.vittiv.springbootcrud311.service;
+package ru.vittiv.springbootcrud312.service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.vittiv.springbootcrud311.dao.UserDao;
-import ru.vittiv.springbootcrud311.model.Role;
-import ru.vittiv.springbootcrud311.model.User;
+import ru.vittiv.springbootcrud312.dao.UserDao;
+import ru.vittiv.springbootcrud312.model.Role;
+import ru.vittiv.springbootcrud312.model.User;
 
 import java.util.HashSet;
 import java.util.Set;

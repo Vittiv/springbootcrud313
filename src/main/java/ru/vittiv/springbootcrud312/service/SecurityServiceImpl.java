@@ -1,11 +1,11 @@
-package ru.vittiv.springbootcrud311.service;
+package ru.vittiv.springbootcrud312.service;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SecurityServiceImpl implements ru.vittiv.springbootcrud311.service.SecurityService {
+public class SecurityServiceImpl implements ru.vittiv.springbootcrud312.service.SecurityService {
 
 //    private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 

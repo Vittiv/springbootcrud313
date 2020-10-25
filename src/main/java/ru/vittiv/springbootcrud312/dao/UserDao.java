@@ -1,7 +1,7 @@
-package ru.vittiv.springbootcrud311.dao;
+package ru.vittiv.springbootcrud312.dao;
 
-import ru.vittiv.springbootcrud311.model.Role;
-import ru.vittiv.springbootcrud311.model.User;
+import ru.vittiv.springbootcrud312.model.Role;
+import ru.vittiv.springbootcrud312.model.User;
 
 import java.util.List;
 

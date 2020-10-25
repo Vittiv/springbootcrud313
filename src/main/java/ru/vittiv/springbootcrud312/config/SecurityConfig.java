@@ -1,4 +1,4 @@
-package ru.vittiv.springbootcrud311.config;
+package ru.vittiv.springbootcrud312.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import ru.vittiv.springbootcrud311.config.handler.LoginSuccessHandler;
+import ru.vittiv.springbootcrud312.config.handler.LoginSuccessHandler;
 
 
 @Configuration

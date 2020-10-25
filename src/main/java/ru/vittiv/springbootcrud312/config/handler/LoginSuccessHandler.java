@@ -1,4 +1,4 @@
-package ru.vittiv.springbootcrud311.config.handler;
+package ru.vittiv.springbootcrud312.config.handler;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

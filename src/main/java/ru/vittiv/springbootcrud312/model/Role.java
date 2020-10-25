@@ -1,4 +1,4 @@
-package ru.vittiv.springbootcrud311.model;
+package ru.vittiv.springbootcrud312.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

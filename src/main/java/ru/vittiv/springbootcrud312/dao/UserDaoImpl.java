@@ -1,16 +1,15 @@
-package ru.vittiv.springbootcrud311.dao;
+package ru.vittiv.springbootcrud312.dao;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.vittiv.springbootcrud311.model.Role;
-import ru.vittiv.springbootcrud311.model.User;
+import ru.vittiv.springbootcrud312.model.Role;
+import ru.vittiv.springbootcrud312.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 @Transactional

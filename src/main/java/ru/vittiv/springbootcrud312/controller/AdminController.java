@@ -1,4 +1,4 @@
-package ru.vittiv.springbootcrud311.controller;
+package ru.vittiv.springbootcrud312.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import ru.vittiv.springbootcrud311.model.Role;
-import ru.vittiv.springbootcrud311.model.User;
-import ru.vittiv.springbootcrud311.service.UserService;
+import ru.vittiv.springbootcrud312.model.Role;
+import ru.vittiv.springbootcrud312.model.User;
+import ru.vittiv.springbootcrud312.service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
