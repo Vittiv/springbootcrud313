@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+     >
 
 <head>
     <meta charset="UTF-8">
@@ -23,13 +24,13 @@
         <nav class="col-md-2 d-none d-md-block sidebar">
             <div class="sidebar-sticky mt-3">
                 <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                    <li  sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                        <a class="nav-link active rounded" href="#">
                             Admin <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/users">
+                        <a class="nav-link rounded" href="/user/hello">
                             User
                         </a>
                     </li>
@@ -40,15 +41,7 @@
         </nav>
 
         <main role="main" class="bg-light col-md-9 ml-sm-auto col-lg-10 px-4 mt-3">
-<!--            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">-->
-<!--            <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">-->
-<!--                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div>-->
-<!--            <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">-->
-<!--                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>-->
-
-<!--                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">-->
-                        <h1 class="h2 ">Admin panel</h1>
-<!--                    </div>-->
+            <h1 class="h2 ">Admin panel</h1>
 
 
             <ul class="nav nav-tabs">
@@ -88,10 +81,10 @@
                                     <td th:text="${user.username}"></td>
                                     <td th:text="${user.getRoles()}"></td>
                                     <td>
-                                        <a th:href="@{edit(id=${user.id})}">Edit</a>
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#edit">Edit</a>
                                     </td>
                                     <td>&nbsp;&nbsp;&nbsp;
-                                        <a th:href="@{delete(id=${user.id})}">Delete</a>
+                                        <a class="btn btn-danger" th:href="@{delete(id=${user.id})}">Delete</a>
                                     </td>
                                 </tr>
                             </th:block>
@@ -103,6 +96,110 @@
         </main>
     </div>
 </div>
+<!--    Edit modal window-->
+    <div id="edit" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form  action="editSave" method="POST">
+                        <div >
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">Id:</label>
+                            <input type="text" class="form-control" id="id" name="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName" class="col-form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="col-form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName">
+                        </div>
+                        <div class="form-group">
+                            <label for="age" class="col-form-label">Age</label>
+                            <input type="number" class="form-control" id="age" name="age">
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-form-label">Email</label>
+                            <input type="email" class="form-control" id="username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="role" class="sr-only">Role</label>
+                            <select multiple size="2" class="form-control" id="role" name="role" >
+                                <option value="ROLE_ADMIN">ADMIN</option>
+                                <option value="ROLE_USER" th:default="ROLE_USER">USER</option>
+                            </select>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="hidden" ></button>
+                    <input type="submit" class="btn btn-primary" value="Edit">
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    DELETE modal window-->
+<!--    <div class="modal" id="delete" tabindex="-1" role="dialog">-->
+<!--        <div class="modal-dialog modal-dialog-centered">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Delete user</h5>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <form>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="id" class="col-form-label">Id</label>-->
+<!--                            <input type="text" class="form-control" id="id" name="id" readonly>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="firstName" class="col-form-label">First name</label>-->
+<!--                            <input type="text" class="form-control" id="firstName" name="firstName" readonly>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="lastName" class="col-form-label">Last name</label>-->
+<!--                            <input type="text" class="form-control" id="lastName" name="lastName" readonly>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="age" class="col-form-label">Last name</label>-->
+<!--                            <input type="number" class="form-control" id="age" name="age" readonly>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="username" class="col-form-label">Last name</label>-->
+<!--                            <input type="email" class="form-control" id="username" name="username" readonly>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="role" class="sr-only">Role</label>-->
+<!--                            <select multiple class="form-control" size="2" id="role" name="role" readonly>-->
+<!--                                <option value="ROLE_ADMIN">ADMIN</option>-->
+<!--                                <option selected="selected" value="ROLE_USER" th:default="ROLE_USER">USER</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                    <button type="button" class="btn btn-primary">Edit</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
