@@ -43,15 +43,6 @@
         <main role="main" class="bg-light col-md-9 ml-sm-auto col-lg-10 px-4 mt-3">
             <h1 class="h2 ">User information</h1>
 
-
-<!--            <ul class="nav nav-tabs">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link active" href="/admin/dashboard">Users table</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link " href="/admin/newUser">New User</a>-->
-<!--                </li>-->
-<!--            </ul>-->
             <table class="table" >
                 <thead class="thead-light">
                 <th scope="col">About user</th>
@@ -67,12 +58,9 @@
                             <th>Age</th>
                             <th>Email</th>
                             <th>Role</th>
-<!--                            <th>Edit</th>-->
-<!--                            <th>Delete</th>-->
                         </tr>
                         </thead>
                         <tbody>
-<!--                        <th:block th:object="${user}">-->
                             <tr>
                                 <td th:text="${user.id}"></td>
                                 <td th:text="${user.firstName}"></td>
@@ -80,14 +68,7 @@
                                 <td th:text="${user.age}"></td>
                                 <td th:text="${user.username}"></td>
                                 <td th:text="${user.getRoles()}"></td>
-<!--                                <td>-->
-<!--                                    <a class="btn btn-primary" data-toggle="modal" data-target="#edit">Edit</a>-->
-<!--                                </td>-->
-<!--                                <td>&nbsp;&nbsp;&nbsp;-->
-<!--                                    <a class="btn btn-danger" th:href="@{delete(id=${user.id})}">Delete</a>-->
-<!--                                </td>-->
                             </tr>
-<!--                        </th:block>-->
                         </tbody>
                     </table>
                 </div>

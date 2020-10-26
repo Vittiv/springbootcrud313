@@ -21,7 +21,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form th:action="@{/delete/{id}}"  method="POST" >
                     <div class="form-group">
                         <label for="id" class="col-form-label">Id</label>
                         <input type="text" class="form-control" id="id" name="id" readonly>

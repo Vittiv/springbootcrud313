@@ -81,7 +81,9 @@
                                     <td th:text="${user.username}"></td>
                                     <td th:text="${user.getRoles()}"></td>
                                     <td>
-                                        <a class="btn btn-primary" data-toggle="modal" data-target="#edit">Edit</a>
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#edit" data-user-id="${user.id}">Edit</a>
+                                        <button type="button" data-toggle="modal" data-target="#edit" th:user-name="${user.username}" th:user-id="${user.id}" th:onclick="editModal(this, this.getAttribute('user-name'), this.getAttribute('user-id'))" class="btn btn-primary">Edit JS</button>
+
                                     </td>
                                     <td>&nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-danger" th:href="@{delete(id=${user.id})}">Delete</a>
@@ -96,7 +98,7 @@
         </main>
     </div>
 </div>
-<!--    Edit modal window-->
+<!--    Modal Edit window-->
     <div id="edit" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -107,11 +109,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form  action="editSave" method="POST">
+                    <form  th:action="@{/editSave}"  method="POST" >
                         <div >
                         <div class="form-group">
                             <label for="id" class="col-form-label">Id:</label>
-                            <input type="text" class="form-control" id="id" name="id" readonly>
+                            <input type="text" class="form-control" id="id" name="id" value="{user-id}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="firstName" class="col-form-label">First name</label>
@@ -145,9 +147,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="hidden" ></button>
-                    <input type="submit" class="btn btn-primary" value="Edit">
 
+                    <button type="submit" class="btn btn-primary" value="Edit" >Edit</button>
                 </div>
             </div>
         </div>
@@ -204,6 +205,41 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--    <script>-->
+<!--        $("#edit").on('show.bs.modal', function(e) {-->
+<!--            var userId = $(e.relatedTarget).data('user-id');-->
 
+<!--            var cols = $('#user-' + userId + ' td');-->
+<!--            var firstName = $(cols[1]).text();-->
+<!--            var lastName = $(cols[2]).text();-->
+<!--            var age = $(cols[3]).text();-->
+<!--            var username = $(cols[4]).text();-->
+<!--            var password = $(cols[5]).text();-->
+<!--            var role = $(cols[6]).text();-->
+
+<!--            $('#firstName').val(firstName);-->
+<!--            $('#lastName').val(lastName);-->
+<!--            $('#age').val(age);-->
+<!--            $('#username').val(username);-->
+<!--            $('#password').val(password);-->
+<!--            $('#role').val(role);-->
+<!--        });-->
+
+<!--        $("#edit").on('hidden.bs.modal', function() {-->
+<!--            var form = $(this).find('form');-->
+<!--            form[0].reset();-->
+<!--        });-->
+<!--    </script>-->
+<script>
+    function editModal(t, username, id) {
+
+        var modal = $('#edit');
+
+        // change modal content
+        modal.find('#userId').val(id);
+        modal.find('#userName').val(username);
+
+    }
+</script>
 </body>
 </html>
