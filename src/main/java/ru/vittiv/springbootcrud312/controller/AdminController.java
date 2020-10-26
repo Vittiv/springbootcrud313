@@ -46,7 +46,7 @@ public class AdminController {
     //
     @GetMapping("/newUser")
     public String getUser() {
-        return "admin/addUser";
+        return "admin/newUser";
     }
 
     @PostMapping("/create")
