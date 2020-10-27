@@ -235,6 +235,18 @@
 <!--            form[0].reset();-->
 <!--        });-->
 <!--    </script>-->
-
+<script>
+    function updateUser(id) {
+        $.ajax({
+            url: "/admin/updates/" + id,
+            success: function (response) {
+                console.log(response);
+                $('#target').html(response);
+                $('#edit').modal('show');
+                // $('#exampleModal3 .modal').modal('open');
+            }
+        });
+    }
+</script>
 </body>
 </html>
