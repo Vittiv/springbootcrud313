@@ -58,7 +58,7 @@ public class AdminController {
         }
         user.setRoles(roleSet);
         userService.updateUser(user);
-        return "redirect:users";
+        return "admin/dashboard";
     }
 
     //
