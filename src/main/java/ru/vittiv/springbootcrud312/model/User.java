@@ -24,6 +24,18 @@ public class User implements UserDetails {
     private String lastName;
     private int age;
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public User(String username, String password, String firstName, String lastName, int age, Set<Role> roles) {
         this.username = username;
         this.password = password;
