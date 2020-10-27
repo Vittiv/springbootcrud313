@@ -4,6 +4,7 @@ $(document).ready(function () {
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text(); //return New or Edit
+        // var user = document.getElementById('edituserbutton');
 
         if (text === 'Edit') {
             $.get(href, function (user, status) {

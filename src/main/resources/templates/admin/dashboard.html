@@ -19,7 +19,7 @@
 
     <title>Admin panel</title>
 </head>
-<body>
+<body th:object="${users}">
 <div class="container">
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-item"><a th:inline="text"> [[${#httpServletRequest.remoteUser}]] </a> with role <a th:inline="text"> [[${#httpServletRequest.remoteUser}]] </a> </a>
@@ -89,8 +89,8 @@
                                     <td th:text="${user.age}"></td>
                                     <td th:text="${user.username}"></td>
                                     <td th:text="${user.getRoles()}"></td>
-                                    <td>
-                                        <a class="btn btn-primary eBtn" data-toggle="modal" data-target="#editModal" >Edit</a>
+                                    <td id="edituserbutton">
+                                        <a class="btn btn-primary eBtn" data-toggle="modal" data-target="#editModal" data-user="${user}">Edit</a>
                                     </td>
                                     <td>&nbsp;&nbsp;&nbsp;
                                         <a class="btn btn-danger delBtn" th:href="@{delete/(id=${user.id})}">Delete</a>
@@ -107,7 +107,8 @@
 </div>
 </div>
 <!--    Modal Edit window-->
-<div class="myForm">
+
+<div class="myForm" >
     <form  th:action="@{editSave}"  method="POST" action="editSave">
         <div aria-hidden="true" aria-labelledby="exampleModalLabel"
          id="editModal" class="modal fade" tabindex="-1" role="dialog">
@@ -119,44 +120,38 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                    <div class="modal-body">
+                    <div class="modal-body " >
                         <div class="form-group">
                             <label for="id" class="col-form-label">Id</label>
-                            <input type="text" class="form-control" id="id" name="id" value="${user.id}" readonly>
-                        </div>
-                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm" id="id" name="id" value="td.dataset.user.id" readonly>
+
                             <label for="firstName" class="col-form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName">
-                        </div>
-                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm" id="firstName" name="firstName">
+
                             <label for="lastName" class="col-form-label">Last name</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName">
-                        </div>
-                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm" id="lastName" name="lastName">
+
                             <label for="age" class="col-form-label">Age</label>
-                            <input type="number" class="form-control" id="age" name="age">
-                        </div>
-                        <div class="form-group">
+                            <input type="number" class="form-control form-control-sm" id="age" name="age">
+
                             <label for="username" class="col-form-label">Email</label>
-                            <input type="email" class="form-control" id="username" name="username">
-                        </div>
-                        <div class="form-group">
+                            <input type="email" class="form-control form-control-sm" id="username" name="username">
+
                             <label for="password" class="col-form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                        <div class="form-group">
-                            <label for="role" class="sr-only">Role</label>
-                            <select multiple size="2" class="form-control" id="role" name="role" >
+                            <input type="password" class="form-control form-control-sm" id="password" name="password">
+
+                            <label for="role" class="col-form-label">Role</label>
+                            <select multiple size="2" class="form-control form-control-sm" id="role" name="role" >
                                 <option value="ROLE_ADMIN">ADMIN</option>
                                 <option value="ROLE_USER" th:default="ROLE_USER">USER</option>
                             </select>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Edit">
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Edit">
-                </div>
+
+
             </div>
         </div>
     </form>
