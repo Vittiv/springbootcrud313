@@ -49,25 +49,25 @@ public class AdminController {
         return "admin/newUser";
     }
 
-    @PostMapping("/create")
-    public String createNewUser(@ModelAttribute User user,
-                                @RequestParam("firstName") String firstName,
-                                @RequestParam("lastName") String lastName,
-                                @RequestParam("username") String username,
-                                @RequestParam("age") int age,
-                                @RequestParam("role") String[] roles) {
-        Set<Role> roleSet = new HashSet<>();
-        for (String role : roles) {
-            roleSet.add(userService.getRoleByName(role));
-        }
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
-        user.setAge(age);
-        user.setRoles(roleSet);
-        userService.updateUser(user);
-        return "redirect:dashboard";
-    }
+//    @PostMapping("/create")
+//    public String createNewUser(@ModelAttribute User user,
+//                                @RequestParam("firstName") String firstName,
+//                                @RequestParam("lastName") String lastName,
+//                                @RequestParam("username") String username,
+//                                @RequestParam("age") int age,
+//                                @RequestParam("role") String[] roles) {
+//        Set<Role> roleSet = new HashSet<>();
+//        for (String role : roles) {
+//            roleSet.add(userService.getRoleByName(role));
+//        }
+//        user.setFirstName(firstName);
+//        user.setLastName(lastName);
+//        user.setUsername(username);
+//        user.setAge(age);
+//        user.setRoles(roleSet);
+//        userService.updateUser(user);
+//        return "redirect:dashboard";
+//    }
 
     //
     @GetMapping("/edit")
@@ -77,8 +77,8 @@ public class AdminController {
     }
 
     @PostMapping("/editSave")
-    public String editUser(Model model,
-                           @RequestParam("id") Long id,
+    public String editUser(@ModelAttribute User user,
+//                           @RequestParam("id") Long id,
                            @RequestParam("firstName") String firstName,
                            @RequestParam("lastName") String lastName,
                            @RequestParam("age") int age,
@@ -89,7 +89,13 @@ public class AdminController {
         for (String roles : role) {
             roleSet.add(userService.getRoleByName(roles));
         }
-        userService.updateUser(new User(username, password, firstName, lastName, age, roleSet));
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setAge(age);
+        user.setRoles(roleSet);
+        userService.updateUser(user);
         return "redirect:dashboard";
     }
 

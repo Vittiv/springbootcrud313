@@ -23,12 +23,12 @@
 <body>
 <!--    Modal Edit window-->
 
-<div class="myForm col-5" >
+<div class="myForm" >
     <form  th:action="@{editSave}"  method="POST" action="editSave" >
 
         <div class="container">
             <div class="row justify-content-center align-items-center">
-                <div class="form-group">
+                <div class="form-group text-center col-7">
                     <label for="id" class="col-form-label">Id</label>
                     <input type="text" class="form-control form-control-sm" id="id" name="id" th:placeholder="*{id}" readonly>
 
@@ -52,8 +52,8 @@
                         <option value="ROLE_ADMIN">ADMIN</option>
                         <option value="ROLE_USER" th:default="ROLE_USER">USER</option>
                     </select>
-                    <button type="button" class="btn btn-secondary mt-3" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary mt-3" value="Edit">
+                    <button type="button" class="btn btn-secondary m-3" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary m-3" value="Edit">
                 </div>
             </div>
         </div>

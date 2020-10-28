@@ -32,23 +32,6 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 
-//        Set<Role> userRoles = user.getRoles();
-////        if (userRoles.containsAll(Role.FULL_SET)) {
-////            user.setRoles(Role.FULL_SET);
-////        }
-//////            // set FULL_SET roles
-////            user.setRoleById(3);
-////        } else
-//        if (userRoles.contains(Role.ROLE_ADMIN)) {
-//            // set ADMIN roles
-//            user.setRoles(Role.ADMIN);
-//        }
-//        else if(userRoles.contains(Role.ROLE_USER)){
-//            // set USER roles
-//            user.setRoles(Role.USER);
-//        }
-////        else user.setRoleById(2);
-
         entityManager.merge(user);
     }
 
