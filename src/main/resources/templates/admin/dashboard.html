@@ -22,11 +22,11 @@
             <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
                 <span class="text-light">with role </span>
                 <span th:inline="text" class="text-light"> [[${#httpServletRequest.remoteUser}]] </span>
-                <form class="form-inline" th:action="@{/logout}" method="POST">
-                    <input class="mr-auto" type="submit" value="Logout">
-                </form>
             </span>
         </a>
+        <form class="form-inline" th:action="@{/logout}" method="POST">
+            <input class="mr-auto" type="submit" value="Logout">
+        </form>
     </nav>
 
     <div class="container-fluid">
