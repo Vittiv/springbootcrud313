@@ -61,7 +61,7 @@
 <!--                               <tbody >-->
                                <div>
                                 <form action="editSave" method="post">
-                                    <div class=" form-control-sm text-center">
+                                    <div class=" form-control-sm text-center font-weight-bold">
                                         <div class="form-group  my-1">
                                             <label for="firstName" class="col-form-label">First name</label>
                                             <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
@@ -78,7 +78,7 @@
                                             <label for="password" class="col-form-label">Password</label>
                                             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 
-                                            <label for="role" class="sr-only">Role</label>
+                                            <label for="role" class="col-form-label">Role</label>
                                             <select multiple size="2" class="form-control" id="role" name="role">
                                                 <option value="ROLE_ADMIN">ADMIN</option>
                                                 <option value="ROLE_USER" th:default="ROLE_USER">USER</option>
