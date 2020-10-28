@@ -16,7 +16,7 @@
     <title>Admin panel</title>
 </head>
 <body>
-<div class="container">
+<!--<div class="container">-->
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-item"><a th:inline="text"> [[${#httpServletRequest.remoteUser}]] </a> with role <a th:inline="text"> [[${#httpServletRequest.remoteUser}]] </a> </a>
             <form class="form-inline" th:action="@{/logout}" method="POST">
@@ -41,7 +41,7 @@
                     </li>
                 </ul>
 
-                </ul>
+<!--                </ul>-->
             </div>
         </nav>
 
@@ -100,9 +100,9 @@
                 </tbody>
             </table>
         </main>
+        </div>
     </div>
-</div>
-</div>
+<!--</div>-->
 <!-- Edit modal-->
 <div class="modal" tabindex="-1" role="dialog" id="editModal">
     <div class="modal-dialog">
