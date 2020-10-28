@@ -94,14 +94,26 @@ public class AdminController {
     }
 
     //
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String deleteUser(@RequestParam(value = "id") String id) {
         Long userId = Long.parseLong(id);
         userService.deleteUser(userId);
         return "admin/dashboard";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteUserForm(@PathVariable("id") Long id, Model model){
+        User user = userService.getUserById(id);
+        model.addAttribute("id", user.getId());
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("password", user.getPassword());
+        model.addAttribute("firstName", user.getFirstName());
+        model.addAttribute("lastName", user.getLastName());
+        model.addAttribute("age", user.getAge());
+        model.addAttribute("roles", user.getRoles());
 
+        return "admin/delete";
+    }
 
     @GetMapping("/updates/{id}")
     public String updateUsers(@PathVariable("id") Long id, Model model){

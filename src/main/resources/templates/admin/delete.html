@@ -11,57 +11,42 @@
     <title>Delete user</title>
 </head>
 <body>
-<div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete user</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/delete/{id}}"  method="POST" >
-                    <div class="form-group">
-                        <label for="id" class="col-form-label">Id</label>
-                        <input type="text" class="form-control" id="id" name="id" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstName" class="col-form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName" class="col-form-label">Last name</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="age" class="col-form-label">Last name</label>
-                        <input type="number" class="form-control" id="age" name="age" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="username" class="col-form-label">Last name</label>
-                        <input type="email" class="form-control" id="username" name="username" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="role" class="sr-only">Role</label>
-                        <select multiple class="form-control" size="2" id="role" name="role" readonly>
-                            <option value="ROLE_ADMIN">ADMIN</option>
-                            <option selected="selected" value="ROLE_USER" th:default="ROLE_USER">USER</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Edit</button>
-            </div>
+<div class="delForm col-5" >
+    <form th:action="@{delete}"  method="POST" >
+        <div class="container">
+        <div class="row justify-content-center align-items-center">
+        <div class="form-group">
+            <label for="id" class="col-form-label">Id</label>
+            <input type="text" class="form-control" id="id" name="id" th:value="*{id}" th:placeholder="*{id}" readonly>
+
+            <label for="firstName" class="col-form-label">First name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" th:placeholder="*{firstName}" readonly>
+
+            <label for="lastName" class="col-form-label">Last name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" th:placeholder="*{lastName}" readonly>
+
+            <label for="age" class="col-form-label">Last name</label>
+            <input type="number" class="form-control" id="age" name="age" th:placeholder="*{age}" readonly>
+
+            <label for="username" class="col-form-label">Last name</label>
+            <input type="email" class="form-control" id="username" name="username" th:placeholder="*{username}" readonly>
+
+            <label for="role" class="sr-only">Role</label>
+            <select multiple class="form-control" size="2" id="role" name="roles" th:placeholder="*{roles}" readonly>
+                <option value="ROLE_ADMIN">ADMIN</option>
+                <option selected="selected" value="ROLE_USER" th:default="ROLE_USER">USER</option>
+            </select>
         </div>
-    </div>
+        <button type="button" class="btn btn-secondary mt-3" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary mt-3">Delete</button>
+        </div>
+        </div>
+    </form>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
 </body>
 </html>
