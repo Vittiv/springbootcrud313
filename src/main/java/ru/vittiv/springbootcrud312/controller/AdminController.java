@@ -13,6 +13,7 @@ import ru.vittiv.springbootcrud312.service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,6 +32,10 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+        String userRoles = user.getAuthorities().stream().map(r -> r.getAuthority().substring(5) + " ").collect(Collectors.joining());
+        model.addAttribute("userRoles", userRoles);
         model.addAttribute("users", userService.getAllUsers());
         return "admin/dashboard";
     }

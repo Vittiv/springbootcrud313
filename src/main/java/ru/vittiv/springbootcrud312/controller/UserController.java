@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.vittiv.springbootcrud312.model.User;
 import ru.vittiv.springbootcrud312.service.UserService;
 
 
@@ -21,8 +22,9 @@ public class UserController {
     @GetMapping(value = "/hello")
     public String printUserInfo(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("user", userService.getUserByName(auth.getName()));
-
+        User user = userService.getUserByName(auth.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("userRole", user.getRolesString());
         return "hello";
     }
 }
