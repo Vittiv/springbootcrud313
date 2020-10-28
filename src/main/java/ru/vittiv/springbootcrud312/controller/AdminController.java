@@ -49,27 +49,6 @@ public class AdminController {
         return "admin/newUser";
     }
 
-//    @PostMapping("/create")
-//    public String createNewUser(@ModelAttribute User user,
-//                                @RequestParam("firstName") String firstName,
-//                                @RequestParam("lastName") String lastName,
-//                                @RequestParam("username") String username,
-//                                @RequestParam("age") int age,
-//                                @RequestParam("role") String[] roles) {
-//        Set<Role> roleSet = new HashSet<>();
-//        for (String role : roles) {
-//            roleSet.add(userService.getRoleByName(role));
-//        }
-//        user.setFirstName(firstName);
-//        user.setLastName(lastName);
-//        user.setUsername(username);
-//        user.setAge(age);
-//        user.setRoles(roleSet);
-//        userService.updateUser(user);
-//        return "redirect:dashboard";
-//    }
-
-    //
     @GetMapping("/edit")
     public String editPage(@RequestParam("id") Long id, ModelMap model){
         model.addAttribute("user", userService.getUserById(id));
@@ -104,7 +83,7 @@ public class AdminController {
     public String deleteUser(@RequestParam(value = "id") String id) {
         Long userId = Long.parseLong(id);
         userService.deleteUser(userId);
-        return "admin/dashboard";
+        return "redirect:dashboard";
     }
 
     @GetMapping("/delete/{id}")

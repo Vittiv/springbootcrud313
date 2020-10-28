@@ -17,28 +17,29 @@
             <div class="row justify-content-center align-items-center">
                 <div class="form-group  col-7 text-center">
                     <label for="id" class="col-form-label">Id</label>
-                    <input type="text" class="form-control" id="id" name="id" th:value="*{id}" th:placeholder="*{id}" readonly>
+                    <input type="text" class="form-control form-control-sm" id="id" name="id" th:value="*{id}" th:placeholder="*{id}" readonly>
 
                     <label for="firstName" class="col-form-label">First name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" th:placeholder="*{firstName}" readonly>
+                    <input type="text" class="form-control form-control-sm" id="firstName" name="firstName" th:placeholder="*{firstName}" readonly>
 
                     <label for="lastName" class="col-form-label">Last name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" th:placeholder="*{lastName}" readonly>
+                    <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" th:placeholder="*{lastName}" readonly>
 
-                    <label for="age" class="col-form-label">Last name</label>
-                    <input type="number" class="form-control" id="age" name="age" th:placeholder="*{age}" readonly>
+                    <label for="age" class="col-form-label">Age</label>
+                    <input type="number" class="form-control form-control-sm" id="age" name="age" th:placeholder="*{age}" readonly>
 
-                    <label for="username" class="col-form-label">Last name</label>
-                    <input type="email" class="form-control" id="username" name="username" th:placeholder="*{username}" readonly>
+                    <label for="username" class="col-form-label">Email</label>
+                    <input type="email" class="form-control form-control-sm" id="username" name="username" th:placeholder="*{username}" readonly>
 
                     <label for="role" class="sr-only">Role</label>
-                    <select multiple class="form-control" size="2" id="role" name="roles" th:selected="*{roles}" th:placeholder="*{roles}" readonly>
+                    <select multiple class="form-control form-control-sm" size="2" id="role" name="roles" th:selected="*{roles}" th:placeholder="*{roles}" readonly>
                         <option value="ROLE_ADMIN">ADMIN</option>
                         <option value="ROLE_USER" >USER</option>
                     </select>
+                    <button type="button" class="btn btn-secondary m-3" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary m-3">Delete</button>
                 </div>
-                <button type="button" class="btn btn-secondary m-3" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary m-3">Delete</button>
+
             </div>
         </div>
     </form>
