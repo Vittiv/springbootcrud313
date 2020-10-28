@@ -16,9 +16,10 @@
         <a class="navbar-item text-light">
                 <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
                     <span class="text-light">with role </span>
-                    <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">
-                        <span sec:authentication="principal.authorities"></span>
-                    </span>
+                     <span th:text="${userRoles}"></span>
+<!--                    <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">-->
+<!--                        <span sec:authentication="principal.authorities"></span>-->
+<!--                    </span>-->
                 </span>
         </a>
         <form class="form-inline" th:action="@{/logout}" method="POST">

@@ -55,32 +55,34 @@
                 <thead class="thead-light">
                 <th scope="col">About user</th>
                 </thead>
-                <tbody>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Age</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                <div class="container border-dark bg-white">
+                    <tbody>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                            <thead>
                             <tr>
-                                <td th:text="${user.id}"></td>
-                                <td th:text="${user.firstName}"></td>
-                                <td th:text="${user.lastName}"></td>
-                                <td th:text="${user.age}"></td>
-                                <td th:text="${user.username}"></td>
-                                <td th:text="${userRole}"></td>
+                                <th>Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                                <th>Role</th>
                             </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.firstName}"></td>
+                                    <td th:text="${user.lastName}"></td>
+                                    <td th:text="${user.age}"></td>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${userRole}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </tbody>
                 </div>
-                </tbody>
             </table>
         </main>
     </div>

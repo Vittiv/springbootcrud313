@@ -50,7 +50,12 @@ public class AdminController {
 
     //
     @GetMapping("/newUser")
-    public String getUser() {
+    public String getUser(ModelMap model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
+        String userRoles = user.getAuthorities().stream().map(r -> r.getAuthority().substring(5) + " ").collect(Collectors.joining());
+        model.addAttribute("userRoles", userRoles);
+
         return "admin/newUser";
     }
 
