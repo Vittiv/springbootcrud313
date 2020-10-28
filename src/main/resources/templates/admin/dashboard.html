@@ -17,15 +17,16 @@
 </head>
 <body >
 <!--<div class="container">-->
-    <nav class="navbar navbar-dark bg-dark ">
+    <nav class="navbar navbar-dark bg-dark text-left">
         <a class="navbar-item text-light">
-            <a class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]] </a>
-            <a class="text-light">with role </a>
-            <a th:inline="text" class="text-light"> roles </a>
+            <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
+                <span class="text-light">with role </span>
+                <span th:inline="text" class="text-light"> [[${#httpServletRequest.remoteUser}]] </span>
+                <form class="form-inline" th:action="@{/logout}" method="POST">
+                    <input class="mr-auto" type="submit" value="Logout">
+                </form>
+            </span>
         </a>
-            <form class="form-inline" th:action="@{/logout}" method="POST">
-                <input class="btn btn-outline-light mr-sm-2" type="submit" value="Logout">
-            </form>
     </nav>
 
     <div class="container-fluid">
