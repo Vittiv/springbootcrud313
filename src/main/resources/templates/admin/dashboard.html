@@ -19,7 +19,7 @@
 <!--<div class="container">-->
     <nav class="navbar navbar-dark bg-dark text-left">
         <a class="navbar-item text-light">
-            <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
+            <span  class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
                 <span class="text-light">with role </span>
                 <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">
                 <span sec:authentication="principal.authorities"></span> </span>
@@ -62,7 +62,7 @@
                     <a class="nav-link " href="/admin/newUser">New User</a>
                 </li>
             </ul>
-            <table class="table">
+            <table class="table ">
                 <thead class="thead-light">
                     <th scope="col">All users</th>
                 </thead>
@@ -89,7 +89,7 @@
                                     <td th:text="${user.lastName}"></td>
                                     <td th:text="${user.age}"></td>
                                     <td th:text="${user.username}"></td>
-                                    <td th:text="${user.getRoles()}"></td>
+                                    <td th:text="${user.getRolesString()}"></td>
 <!--                                    <td id="edituserbutton">-->
 <!--                                        <a class="btn btn-primary eBtn" data-toggle="modal" data-target="#editModal" data-user="${user}">Edit</a>-->
                                     <td ><button type="button" class="btn btn-primary"  th:onclick="'javascript:updateUser(\'' + ${user.getId()} +'\');'">Edit</button></td>

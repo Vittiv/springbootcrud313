@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table
@@ -103,6 +104,13 @@ public class User implements UserDetails {
         return roles;
     }
 
+    private String rolesString;
+
+    public String getRolesString() {
+        return getAuthorities().stream().map(r -> r.getAuthority().substring(5) + " ")
+                .collect(Collectors.joining());
+    }
+
     public void setRoles(Set<Role> roles) {
 //        if (roles.contains(Role.ROLE_ADMIN)){
 //            if (roles.contains(Role.ROLE_USER)) roles = Role.FULL_SET;
@@ -161,4 +169,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
