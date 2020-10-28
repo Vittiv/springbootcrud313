@@ -17,6 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping(value = "/hello")
     public String printUserInfo(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

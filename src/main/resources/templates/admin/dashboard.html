@@ -21,7 +21,8 @@
         <a class="navbar-item text-light">
             <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
                 <span class="text-light">with role </span>
-                <span th:inline="text" class="text-light"> [[${#httpServletRequest.remoteUser}]] </span>
+                <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">
+                <span sec:authentication="principal.authorities"></span> </span>
             </span>
         </a>
         <form class="form-inline" th:action="@{/logout}" method="POST">
@@ -52,7 +53,6 @@
 
         <main role="main" class="bg-light col-md-9 ml-sm-auto col-lg-10 px-4 mt-3 h-100">
             <h1 class="h2 ">Admin panel</h1>
-
 
             <ul class="nav nav-tabs">
                 <li class="nav-item">
