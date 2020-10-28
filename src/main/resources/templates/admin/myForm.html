@@ -30,25 +30,25 @@
             <div class="row justify-content-center align-items-center">
                 <div class="form-group text-center col-7 font-weight-bold">
                     <label for="id" class="col-form-label">ID</label>
-                    <input type="text" class="form-control form-control-sm" id="id" name="id" th:placeholder="*{id}" readonly>
+                    <input type="text" class="form-control form-control-sm" id="id" name="id" th:value="*{id}" th:placeholder="*{id}" readonly>
 
                     <label for="firstName" class="col-form-label">First name</label>
-                    <input type="text" class="form-control form-control-sm" id="firstName" name="firstName" th:placeholder="*{firstName}">
+                    <input type="text" class="form-control form-control-sm" id="firstName" name="firstName" th:value="*{firstName}" th:placeholder="*{firstName}">
 
                     <label for="lastName" class="col-form-label">Last name</label>
-                    <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" th:placeholder="*{lastName}">
+                    <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" th:value="*{lastName}" th:placeholder="*{lastName}">
 
                     <label for="age" class="col-form-label">Age</label>
-                    <input type="number" class="form-control form-control-sm" id="age" name="age" th:placeholder="*{age}">
+                    <input type="number" class="form-control form-control-sm" id="age" name="age" th:value="*{age}" th:placeholder="*{age}">
 
                     <label for="username" class="col-form-label">Email</label>
                     <input type="email" class="form-control form-control-sm" id="username" th:value="*{username}" name="username" th:placeholder="*{username}">
 
                     <label for="password" class="col-form-label">Password</label>
-                    <input type="password" class="form-control form-control-sm" id="password" name="password">
+                    <input type="password" class="form-control form-control-sm" id="password" th:default="*{password}" name="password">
 
                     <label for="role" class="col-form-label">Role</label>
-                    <select multiple size="2" class="form-control form-control-sm" id="role" name="role" >
+                    <select multiple size="2" class="form-control form-control-sm" id="role" th:default="*{roles}" name="role" >
                         <option value="ROLE_ADMIN">ADMIN</option>
                         <option value="ROLE_USER" th:default="ROLE_USER">USER</option>
                     </select>

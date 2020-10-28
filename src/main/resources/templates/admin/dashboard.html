@@ -159,7 +159,6 @@
         $.ajax({
             url: "/admin/delete/" + id,
             success: function (response) {
-                console.log(response);
                 $('#targetDel').html(response);
                 $('#delModal').modal('show');
             }
