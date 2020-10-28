@@ -33,16 +33,16 @@
                     <input type="text" class="form-control form-control-sm" id="id" name="id" th:placeholder="*{id}" readonly>
 
                     <label for="firstName" class="col-form-label">First name</label>
-                    <input type="text" class="form-control form-control-sm" id="firstName" name="firstName">
+                    <input type="text" class="form-control form-control-sm" id="firstName" name="firstName" th:placeholder="*{firstName}">
 
                     <label for="lastName" class="col-form-label">Last name</label>
-                    <input type="text" class="form-control form-control-sm" id="lastName" name="lastName">
+                    <input type="text" class="form-control form-control-sm" id="lastName" name="lastName" th:placeholder="*{lastName}">
 
                     <label for="age" class="col-form-label">Age</label>
-                    <input type="number" class="form-control form-control-sm" id="age" name="age">
+                    <input type="number" class="form-control form-control-sm" id="age" name="age" th:placeholder="*{age}">
 
                     <label for="username" class="col-form-label">Email</label>
-                    <input type="email" class="form-control form-control-sm" id="username" th:value="*{username}" name="username">
+                    <input type="email" class="form-control form-control-sm" id="username" th:value="*{username}" name="username" th:placeholder="*{username}">
 
                     <label for="password" class="col-form-label">Password</label>
                     <input type="password" class="form-control form-control-sm" id="password" name="password">

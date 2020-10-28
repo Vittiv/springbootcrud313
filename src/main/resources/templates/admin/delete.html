@@ -31,13 +31,13 @@
                     <label for="username" class="col-form-label">Email</label>
                     <input type="email" class="form-control form-control-sm" id="username" name="username" th:placeholder="*{username}" readonly>
 
-                    <label for="role" class="sr-only">Role</label>
+                    <label for="role" class="col-form-label">Role</label>
                     <select multiple class="form-control form-control-sm" size="2" id="role" name="roles" th:selected="*{roles}" th:placeholder="*{roles}" readonly>
                         <option value="ROLE_ADMIN">ADMIN</option>
                         <option value="ROLE_USER" >USER</option>
                     </select>
                     <button type="button" class="btn btn-secondary m-3" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary m-3">Delete</button>
+                    <button type="submit" class="btn btn-danger m-3">Delete</button>
                 </div>
 
             </div>
