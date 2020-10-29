@@ -36,8 +36,8 @@ public class AdminController {
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
         String userRoles = user.getAuthorities().stream().map(r -> r.getAuthority().substring(5) + " ").collect(Collectors.joining());
         model.addAttribute("userRoles", userRoles);
-        model.addAttribute("users", userService.getAllUsers());
-        return "admin/dashboard";
+//        model.addAttribute("users", userService.getAllUsers());
+        return "admin/restFront/dashboard";
     }
 
     @GetMapping(value = "/hello")
