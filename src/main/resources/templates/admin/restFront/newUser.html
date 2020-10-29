@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Admin panel</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark text-left">
+        <a class="navbar-item text-light">
+                <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
+                    <span class="text-light">with role </span>
+                     <span th:text="${userRoles}"></span>
+<!--                    <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">-->
+<!--                        <span sec:authentication="principal.authorities"></span>-->
+<!--                    </span>-->
+                </span>
+        </a>
+        <form class="form-inline" th:action="@{/logout}" method="POST">
+            <input class="mr-auto" type="submit" value="Logout">
+        </form>
+    </nav>
+
+    <div class="container-fluid ">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <div class="sidebar-sticky mt-3">
+                    <ul class="nav nav-pills flex-column">
+                        <li  sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                            <a class="nav-link active rounded" href="/admin/dashboard">
+                                Admin <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link rounded" href="/user/hello">
+                                User
+                            </a>
+                        </li>
+                    </ul>
+
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-3 bg-light ">
+                    <h1 class="h2">Admin panel</h1>
+
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">Users table</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  active" href="/admin/newUser">New User</a>
+                    </li>
+                </ul>
+                <div class="container">
+
+    <!--                    <table class="table">-->
+    <!--                        <thead class="thead-light">-->
+                                 <th>Add new user</th>
+    <!--                        </thead>-->
+                            <div class="container ">
+                                 <div class="row justify-content-center align-items-center">
+    <!--                               <tbody >-->
+                                   <div>
+                                    <form action="editSave" method="post">
+                                        <div class=" form-control-sm text-center font-weight-bold">
+                                            <div class="form-group  my-1">
+                                                <label for="firstName" class="col-form-label">First name</label>
+                                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
+
+                                                <label for="lastName" class="col-form-label">Last name</label>
+                                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name">
+
+                                                <label for="age" class="col-form-label">Age</label>
+                                                <input type="number" class="form-control" id="age" name="age" placeholder="Age">
+
+                                                <label for="username" class="col-form-label">Email</label>
+                                                <input type="email" class="form-control" id="username" name="username" placeholder="Email">
+
+                                                <label for="password" class="col-form-label">Password</label>
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+
+                                                <label for="role" class="col-form-label">Role</label>
+                                                <select multiple size="2" class="form-control" id="role" name="role">
+                                                    <option value="ROLE_ADMIN">ADMIN</option>
+                                                    <option value="ROLE_USER" th:default="ROLE_USER">USER</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-success">Add new user</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+    <!--                        </tbody>-->
+                            </div>
+                            </div>
+    <!--                     </table>-->
+                    </div>
+
+            </main>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
