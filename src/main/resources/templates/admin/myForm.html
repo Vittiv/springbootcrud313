@@ -28,7 +28,7 @@
 
         <div class="container">
             <div class="row justify-content-center align-items-center">
-                <div class="form-group text-center col-7 font-weight-bold">
+                <div class="form-group text-center col-7 font-weight-bold" th:object="${user}">
                     <label for="id" class="col-form-label">ID</label>
                     <input type="text" class="form-control form-control-sm" id="id" name="id" th:value="*{id}" th:placeholder="*{id}" readonly>
 

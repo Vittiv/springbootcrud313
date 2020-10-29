@@ -104,7 +104,6 @@ public class User implements UserDetails {
         return roles;
     }
 
-    private String rolesString;
 
     public String getRolesString() {
         return getAuthorities().stream().map(r -> r.getAuthority().substring(5) + " ")

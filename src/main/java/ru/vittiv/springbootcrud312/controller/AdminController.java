@@ -67,22 +67,13 @@ public class AdminController {
 
     @PostMapping("/editSave")
     public String editUser(@ModelAttribute User user,
-//                           @RequestParam("id") Long id,
-                           @RequestParam("firstName") String firstName,
-                           @RequestParam("lastName") String lastName,
-                           @RequestParam("age") int age,
-                           @RequestParam("username") String username,
-                           @RequestParam("password") String password,
-                           @RequestParam("role") String[] role){
+                           @RequestParam("role") String[] role
+                           ) {
+        // TODO Перенести в модель User, создав конструктор для String[] role
         Set<Role> roleSet = new HashSet<>();
         for (String roles : role) {
             roleSet.add(userService.getRoleByName(roles));
         }
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setAge(age);
         user.setRoles(roleSet);
         userService.updateUser(user);
         return "redirect:dashboard";
@@ -98,14 +89,9 @@ public class AdminController {
 
     @GetMapping("/delete/{id}")
     public String deleteUserForm(@PathVariable("id") Long id, Model model){
+
         User user = userService.getUserById(id);
-        model.addAttribute("id", user.getId());
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("password", user.getPassword());
-        model.addAttribute("firstName", user.getFirstName());
-        model.addAttribute("lastName", user.getLastName());
-        model.addAttribute("age", user.getAge());
-        model.addAttribute("roles", user.getRoles());
+        model.addAttribute("user", user);
 
         return "admin/delete";
     }
@@ -113,13 +99,7 @@ public class AdminController {
     @GetMapping("/updates/{id}")
     public String updateUsers(@PathVariable("id") Long id, Model model){
         User user = userService.getUserById(id);
-        model.addAttribute("id", user.getId());
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("password", user.getPassword());
-        model.addAttribute("firstName", user.getFirstName());
-        model.addAttribute("lastName", user.getLastName());
-        model.addAttribute("age", user.getAge());
-        model.addAttribute("roles", user.getRoles());
+        model.addAttribute("user", user);
 
         return "admin/myForm";
     }
