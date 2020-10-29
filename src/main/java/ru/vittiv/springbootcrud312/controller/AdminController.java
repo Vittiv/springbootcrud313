@@ -24,11 +24,11 @@ public class AdminController {
 
 //    private User user;
 
-    @GetMapping(value = "/users")
-    public String getUsers(ModelMap model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "admin/users";
-    }
+//    @GetMapping(value = "/users")
+//    public String getUsers(ModelMap model) {
+//        model.addAttribute("users", userService.getAllUsers());
+//        return "admin/users";
+//    }
 
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {
