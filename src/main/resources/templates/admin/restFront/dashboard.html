@@ -82,25 +82,8 @@
                                 <th>Delete</th>
                             </tr>
                             </thead>
-                            <tbody>
-<!--                            <th:block th:each="user : ${users}">-->
-<!--                                <tr>-->
-<!--                                    <td th:text="${user.id}"></td>-->
-<!--                                    <td th:text="${user.firstName}"></td>-->
-<!--                                    <td th:text="${user.lastName}"></td>-->
-<!--                                    <td th:text="${user.age}"></td>-->
-<!--                                    <td th:text="${user.username}"></td>-->
-<!--&lt;!&ndash;                                    <td th:text="${userRoles}"></td>&ndash;&gt;-->
-<!--                                    <td th:text="${user.getRolesString()}"></td>-->
-<!--                                    <td id="edituserbutton">-->
-<!--                                        <a class="btn btn-primary eBtn" data-toggle="modal" data-target="#editModal" data-user="${user}">Edit</a>-->
-<!--                                    <td ><button type="button" class="btn btn-primary"  th:onclick="'javascript:updateUser(\'' + ${user.getId()} +'\');'">Edit</button></td>-->
-<!--                                    </td>-->
-<!--                                    <td>&nbsp;&nbsp;&nbsp;-->
+                            <tbody id="tablebody" >
 <!--                                        <button type="button" class="btn btn-danger"  th:onclick="'javascript:delUser(\'' + ${user.getId()} +'\');'">Delete</button>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
-<!--                            </th:block>-->
                             </tbody>
                         </table>
                     </div>
@@ -171,27 +154,77 @@
             }
         });
     }
+
     $(document).ready(function() {
         $.ajax({
             url: "/rest",
-            dataType: 'jsonp',
-            jsonpCallback: 'drawTable'
-        });
+            // dataType: 'json',
+            // context: document.body
+            success: function (response) {
+                $('#tablebody').html(response);
+                console.log(response);
+                // $('#delModal').modal('show');
+            }
+        })
     });
+            // .done(function() {
+            // $( this ).addClass( "done" );
+        // }); showUsers() {
+        // var xhttp;
+        // // if (data == "") {
+        // //     document.getElementById("tablebody").innerHTML = "";
+        // //     return;
+        // // }
+        // xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function() {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         document.getElementById("tablebody").innerHTML = this.responseText;
+        //     }
+        // };
+        // xhttp.open("GET", "/rest", true);
+        // xhttp.send();
+    // })
 
-    function drawTable(data) {
-        var html = '';
-        for (var i = 0; i < data.length; i++) {
-            html += '<tr><td>' + data[i].id + '</td>' +
-                '<td>' + data[i].firstName + '</td>' +
-                '<td>' + data[i].lastName + '</td>' +
-                '<td>' + data[i].age + '</td>' +
-                '<td>' + data[i].username + '</td>' +
-                '<td>' + data[i].password + '</td>' +
-                '<td>' + data[i].roles + '</td></tr>';
-        }
-        $('#table tbody').append(html);
-    }
+    // function drawTable(data) {
+    //     var html = '';
+    //     for (var i = 0; i < data.length; i++) {
+    //         html += '<tr><td>' + data[i].id + '</td>' +
+    //             '<td>' + data[i].firstName + '</td>' +
+    //             '<td>' + data[i].lastName + '</td>' +
+    //             '<td>' + data[i].age + '</td>' +
+    //             '<td>' + data[i].username + '</td>' +
+    //             '<td>' + data[i].password + '</td>' +
+    //             '<td>' + data[i].roles + '</td></tr>';
+    //     }
+    //     $('#table tbody').append(html);
+    // }
+    //
+    // function fillTable(data) {
+    //     let r = new Array(), j = -1;
+    //     for (let key=0, size=data.length; key<size; key++){
+    //         r[++j] ='<tr><td>';
+    //         r[++j] = data[key][0];
+    //         r[++j] = '</td><td class="whatever1">';
+    //         r[++j] = data[key][1];
+    //         r[++j] = '</td><td class="whatever2">';
+    //         r[++j] = data[key][2];
+    //         r[++j] = '</td></tr>';
+    //     }
+    //     $('#dataTable')[0].innerHTML = r.join('');
+    // }
+
+    // function fillTable1(response) {
+    //     let html = $.map(response.d, function (data, i) {
+    //         return "<tr><td>" + data[i].firstName + "</td>" +
+    //             "<td>" + data[i].lastName + "</td>" +
+    //             "<td>" + data[i].age + "</td>" +
+    //             "<td>" + data[i].username + "</td>" +
+    //             "<td>" + data[i].password + "</td>" +
+    //             "<td>" + data[i].roles + "</td></tr>";
+    //     }).join("");
+    //     console.log(html);
+    //     $("#tablebody").append(html);
+    // }
 
 </script>
 </body>

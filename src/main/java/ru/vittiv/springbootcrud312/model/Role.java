@@ -1,5 +1,6 @@
 package ru.vittiv.springbootcrud312.model;
 
+import com.google.gson.annotations.Expose;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -17,10 +18,12 @@ public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    @Expose
+     Long id;
 
     @Column(unique = true)
-    String name;
+    @Expose
+     String name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
@@ -58,9 +61,9 @@ public class Role implements GrantedAuthority {
 
     public void setId(Long id) {
 
-        if (getName().equals(ROLE_ADMIN.name)){ this.id = 1L;}
-        else if (getName().equals(ROLE_USER.name)){ this.id = 2L;}
-
+//        if (getName().equals(ROLE_ADMIN.name)){ this.id = 1L;}
+//        else if (getName().equals(ROLE_USER.name)){ this.id = 2L;}
+        this.id = id;
         }
 
 

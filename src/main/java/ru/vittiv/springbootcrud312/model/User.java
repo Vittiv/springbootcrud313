@@ -1,5 +1,6 @@
 package ru.vittiv.springbootcrud312.model;
 
+import com.google.gson.annotations.Expose;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,16 +14,22 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Expose
     private Long id;
 
     @Column
+    @Expose
     private String username;
 
     @Column
+    @Expose
     private String password;
 
+    @Expose
     private String firstName;
+    @Expose
     private String lastName;
+    @Expose
     private int age;
 
     public void setFirstName(String firstName) {
@@ -45,7 +52,7 @@ public class User implements UserDetails {
         this.age = age;
         this.roles = roles;
     }
-
+    @Expose
     @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Role> roles;
 

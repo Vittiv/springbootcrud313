@@ -1,6 +1,9 @@
 package ru.vittiv.springbootcrud312.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.vittiv.springbootcrud312.model.User;
@@ -23,39 +26,41 @@ public class RestAdminController {
 
     @GetMapping
     public String getUsers() {
-        Gson gson = new Gson();
-        String json = gson.toJson(userService.getAllUsers());
-        return json;
+//        Gson gson = new Gson();
+//        String json = gson.toJson(userService.getAllUsers());
+        return getJson(userService.getAllUsers());
     }
+
     private String getJson(Object object) {
-        Gson gson = new Gson();
+        GsonBuilder builder = new GsonBuilder().disableHtmlEscaping();
+        builder.excludeFieldsWithoutExposeAnnotation();  //<-- This tells GSON look for @Expose
+        Gson gson = builder.create();
         String json = gson.toJson(object);
         return json;
     }
 
-
     @GetMapping("/{id}")
-    public User getUser(@RequestBody User user) {
-        return userService.getUserById(user.getId());
+    public String getUser(@RequestBody User user) {
+        return getJson(userService.getUserById(user.getId()));
     }
 
     @GetMapping("/new")
-    public List<User> addNewUser(@RequestBody User user) {
+    public String addNewUser(@RequestBody User user) {
         userService.updateUser(user);
         List<User> usersList = userService.getAllUsers();
-        return usersList;
+        return getJson(usersList);
     }
     @PutMapping("/edit")
-    public List<User> editUser(@RequestBody User user) {
+    public String editUser(@RequestBody User user) {
         userService.updateUser(user);
         List<User> usersList = userService.getAllUsers();
-        return usersList;
+        return getJson(usersList);
     }
 
     @DeleteMapping("/delete")
-    public List<User> deleteUser(@RequestBody User user) {
+    public String deleteUser(@RequestBody User user) {
         userService.deleteUser(user.getId());
         List<User> usersList = userService.getAllUsers();
-        return usersList;
+        return getJson(usersList);
     }
 }
