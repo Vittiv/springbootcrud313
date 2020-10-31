@@ -173,7 +173,7 @@
                         '<td>' + data[i].lastName + '</td>' +
                         '<td>' + data[i].age + '</td>' +
                         '<td>' + data[i].username + '</td>' +
-                        '<td>' + data[i].roles[0].name + '</td></tr>';
+                        '<td>' + parseRoles(data[i].roles) + '</td></tr>';
                 }
                 $('#tablebody').html(html);
                 console.log(data);
@@ -182,6 +182,14 @@
             }
         })
     });
+
+    function parseRoles(roles) {
+        let res = "";
+        for (let i = 0; i < roles.length; i++) {
+            res += roles[i].name.substr(5) + " ";
+        }
+        return res;
+    }
             // .done(function() {
             // $( this ).addClass( "done" );
         // }); showUsers() {
