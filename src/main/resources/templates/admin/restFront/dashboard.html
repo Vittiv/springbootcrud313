@@ -21,9 +21,10 @@
         <a class="navbar-item text-light">
             <span  class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
                 <span class="text-light">with role </span>
-                <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">
-                <span sec:authentication="principal.authorities"></span>
-<!--                <span th:text="${userRoles}"></span> </span>-->
+<!--                <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">-->
+<!--                <span sec:authentication="principal.authorities"></span>-->
+                <span th:text="${userRoles}"></span>
+                </span>
             </span>
         </a>
         <form class="form-inline" th:action="@{/logout}" method="POST">
@@ -190,8 +191,8 @@
                         '<td>' + data[i].age + '</td>' +
                         '<td>' + data[i].username + '</td>' +
                         '<td>' + parseRoles(data[i].roles) + '</td>' +
-                       '<td>' + editBtn + '</td>' +
-                       '<td>' + deleteBtn + '</td>' +
+                       '<td>' + `<button onclick="updateUser(data[i].id)" class="btn btn-primary">Edit</button>` + '</td>' +
+                       '<td>' + `<button onclick="delUser(data[i].id)" class="btn btn-danger">Delete</button>` + '</td>' +
                        '</tr>';
 
                 }

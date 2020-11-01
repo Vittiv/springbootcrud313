@@ -58,7 +58,7 @@
                 <div class="container border-dark bg-white">
                     <tbody >
                     <div class="table-responsive">
-                        <table class="table table-striped table-sm">
+                        <table class="table table-striped table-sm" id="table">
                             <thead>
                             <tr>
                                 <th>Id</th>
@@ -70,14 +70,7 @@
                             </tr>
                             </thead>
                             <tbody id="tablebody">
-<!--                                <tr>-->
-<!--                                    <td th:text="${user.id}"></td>-->
-<!--                                    <td th:text="${user.firstName}"></td>-->
-<!--                                    <td th:text="${user.lastName}"></td>-->
-<!--                                    <td th:text="${user.age}"></td>-->
-<!--                                    <td th:text="${user.username}"></td>-->
-<!--                                    <td th:text="${userRole}"></td>-->
-<!--                                </tr>-->
+
                             </tbody>
                         </table>
                     </div>
@@ -98,29 +91,14 @@
             data: this.data,
             success: function (data) {
                 let html;
-                const editBtn = document.createElement("BUTTON");
-                editBtn.type = 'button';
-                editBtn.className = 'btn btn-primary';
-                editBtn.innerHTML = "Edit"; // для наглядности
-                editBtn.addEventListener('click', function() {
-                    updateUser(data[i].id);
-                    return false;
-                });
-                const deleteBtn = document.createElement("BUTTON");
-                deleteBtn.type = 'button';
-                deleteBtn.className = 'btn btn-danger';
-                deleteBtn.innerHTML = "Delete"; // для наглядности
-                deleteBtn.addEventListener('click', function() {
-                    delUser(data[i].id);
-                    return false;
-                });
+
                 for (let i = 0; i < data.length; i++) {
                     html += '<tr><td>' + data[i].id + '</td>' +
                         '<td>' + data[i].firstName + '</td>' +
                         '<td>' + data[i].lastName + '</td>' +
                         '<td>' + data[i].age + '</td>' +
                         '<td>' + data[i].username + '</td>' +
-                        '<td>' + parseRoles(data[i].roles) + '</td>'
+                        '<td>' + parseRoles(data[i].roles) + '</td>'+
                         '</tr>';
 
                 }
@@ -129,9 +107,14 @@
             }
         })
     });
+    function parseRoles(roles) {
+        let res = "";
+        for (let i = 0; i < roles.length; i++) {
+            res += roles[i].name.substr(5) + " ";
+        }
+        return res;
+    }
 </script>
-
-
 
 </body>
 </html>
