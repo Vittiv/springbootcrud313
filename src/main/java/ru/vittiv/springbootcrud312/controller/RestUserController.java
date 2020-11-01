@@ -21,7 +21,7 @@ public class RestUserController {
     private UserService userService;
 
     @GetMapping
-    public String userPage() {
+    public String userForPage() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getUserByName(auth.getName());
 //        User recievedUser = new Gson().fromJson(gson, User.class);
