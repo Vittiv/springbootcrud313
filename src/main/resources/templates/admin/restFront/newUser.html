@@ -109,5 +109,47 @@
             </div>
         </div>
     </div>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "/rest",
+            dataType: 'json',
+            data: this.data,
+            success: function (data) {
+                let html;
+                const editBtn = document.createElement("BUTTON");
+                editBtn.type = 'button';
+                editBtn.className = 'btn btn-primary';
+                editBtn.innerHTML = "Edit"; // для наглядности
+                editBtn.addEventListener('click', function() {
+                    updateUser(data[i].id);
+                    return false;
+                });
+                const deleteBtn = document.createElement("BUTTON");
+                deleteBtn.type = 'button';
+                deleteBtn.className = 'btn btn-danger';
+                deleteBtn.innerHTML = "Delete"; // для наглядности
+                deleteBtn.addEventListener('click', function() {
+                    delUser(data[i].id);
+                    return false;
+                });
+                for (let i = 0; i < data.length; i++) {
+                    html += '<tr><td>' + data[i].id + '</td>' +
+                        '<td>' + data[i].firstName + '</td>' +
+                        '<td>' + data[i].lastName + '</td>' +
+                        '<td>' + data[i].age + '</td>' +
+                        '<td>' + data[i].username + '</td>' +
+                        '<td>' + parseRoles(data[i].roles) + '</td>' +
+                        '<td>' + editBtn + '</td>' +
+                        '<td>' + deleteBtn + '</td>' +
+                        '</tr>';
+
+                }
+                $('#tablebody').html(html);
+                // console.log(data);
+            }
+        })
+    });
+</script>
 </body>
 </html>

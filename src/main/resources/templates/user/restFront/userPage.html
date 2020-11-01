@@ -16,7 +16,7 @@
     <a class="navbar-item text-light">
                 <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
                     <span class="text-light">with role </span>
-<!--                     <span th:text="${userRole}"></span>-->
+                     <span th:text="${userRoles}"></span>
                     <!-- <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">-->
 <!--                        <span sec:authentication="principal.authorities"></span>-->
 <!--                    </span>-->
@@ -125,7 +125,7 @@
 
                 }
                 $('#tablebody').html(html);
-                // console.log(data);
+                console.log(data);
             }
         })
     });

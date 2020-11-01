@@ -45,7 +45,7 @@ public class AdminController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("user", userService.getUserByName(auth.getName()));
 
-        return "hello";
+        return "old_hello";
     }
 
     //
