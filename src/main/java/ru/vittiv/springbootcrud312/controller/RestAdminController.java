@@ -55,14 +55,14 @@ public class RestAdminController {
     public String editUser(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         userService.updateUser(user);
-        List<User> usersList = userService.getAllUsers();
-        return getJson(usersList);
+//        List<User> usersList = userService.getAllUsers();
+        return getJson(user);
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        List<User> usersList = userService.getAllUsers();
-        return getJson(usersList);
+//        List<User> usersList = userService.getAllUsers();
+        return getJson(userService.getUserById(id));
     }
 }
