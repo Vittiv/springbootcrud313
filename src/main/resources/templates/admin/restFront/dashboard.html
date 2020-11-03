@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link rounded" href="/user/hello">
+                        <a class="nav-link rounded" href="/user/dashboard">
                             User
                         </a>
                     </li>
@@ -332,9 +332,8 @@
             .then(response => response.json())
             .then(result => {
                 $('#targetDel').empty()
-                let roles = result.roles;
                 let roleNew = "";
-                for (let role of roles){
+                for (let role of result.roles){
                     roleNew = roleNew + role.name.substr(5) + " "
 
                 }
@@ -346,8 +345,8 @@
                             <input type="text" value="${result.id}" class="form-control" id="idDel" placeholder="id">
                         </div>
                         <div class="form-group">
-                            <label for="userameDel">Username</label>
-                            <input type="text" value="${result.username}" class="form-control" id="userameDel" placeholder="username">
+                            <label for="usernameDel">Username</label>
+                            <input type="text" value="${result.username}" class="form-control" id="usernameDel" placeholder="username">
                         </div>
                         <div class="form-group">
                             <label for="passwordDel">Password</label>
@@ -374,6 +373,8 @@
                 .then(response => response.json())
                 .then(result => {
                     $('#editModal').empty()
+                    $('#target').html(result);
+                    $('#editModal').modal('show');
                 //     $('#editModal').append(`<tr id="infoUsers"></tr>
                 //     <td id="idUser">${result.id}</td>
                 //     <td id="idUser">${result.firstName}</td>
