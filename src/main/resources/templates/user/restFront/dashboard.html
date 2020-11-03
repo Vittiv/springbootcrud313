@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active rounded" href="/user/hello">
+                        <a class="nav-link active rounded" href="">
                             User
                         </a>
                     </li>
@@ -85,27 +85,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-        $.ajax({
-            url: "/user/restFront",
-            dataType: 'json',
-            data: this.data,
-            success: function (data) {
-                let html;
+        fetch('/user/restFront')
+        .then(response =>response.json())
+        .then(result => {
+            console.log(result)
 
-                for (let i = 0; i < data.length; i++) {
-                    html += '<tr><td>' + data[i].id + '</td>' +
-                        '<td>' + data[i].firstName + '</td>' +
-                        '<td>' + data[i].lastName + '</td>' +
-                        '<td>' + data[i].age + '</td>' +
-                        '<td>' + data[i].username + '</td>' +
-                        '<td>' + parseRoles(data[i].roles) + '</td>'+
-                        '</tr>';
+                let roles = result.roles;
 
-                }
-                $('#tablebody').html(html);
-                console.log(data);
-            }
-        })
+
+                $('#tablebody').append(`<tr id="infoUsers"></tr>
+                    <td id="idUser">${result.id}</td>
+                    <td id="idfirst">${result.firstName}</td>
+                    <td id="idlast">${result.lastName}</td>
+                    <td id="idage">${result.age}</td>
+                    <td id="idUsername">${result.username}</td>
+                    <td id="idRole">${roles[0].name.substr(5)}</td>`)
+            })
     });
     function parseRoles(roles) {
         let res = "";

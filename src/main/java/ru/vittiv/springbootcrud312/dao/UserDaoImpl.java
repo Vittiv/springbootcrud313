@@ -62,4 +62,12 @@ public class UserDaoImpl implements UserDao {
         entityManager.persist(role);
     }
 
+    @Override
+    public void addUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        if (user.getRoles().contains(Role.ROLE_USER) || user.getRoles().contains(Role.ROLE_ADMIN)) {
+
+        }
+        entityManager.merge(user);
+    }
 }
