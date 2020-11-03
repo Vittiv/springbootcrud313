@@ -32,8 +32,9 @@ public class RestAdminController {
     }
 
     private String getJson(Object object) {
+        //This tells GSON look for @Expose, could be change to @Transient on Role.users field
         GsonBuilder builder = new GsonBuilder().disableHtmlEscaping();
-        builder.excludeFieldsWithoutExposeAnnotation();  //<-- This tells GSON look for @Expose
+        builder.excludeFieldsWithoutExposeAnnotation();
         Gson gson = builder.create();
         String json = gson.toJson(object);
         return json;
@@ -50,8 +51,8 @@ public class RestAdminController {
         List<User> usersList = userService.getAllUsers();
         return getJson(usersList);
     }
-    @PutMapping("/edit")
-    public String editUser(@RequestBody Long id) {
+    @PutMapping("/edit/{id}")
+    public String editUser(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         userService.updateUser(user);
         List<User> usersList = userService.getAllUsers();
@@ -59,7 +60,7 @@ public class RestAdminController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@RequestBody Long id) {
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         List<User> usersList = userService.getAllUsers();
         return getJson(usersList);

@@ -161,8 +161,8 @@
                     <td id="idUsername">${user.username}</td>
                     <td id="idPassword">${user.age}</td>
                     <td id="idRole">${roleNew}</td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="updateUser(${user.id})">Edit</button></td>
-                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal" id="${user.id}" onclick="deleteUser(${user.id})" >Delete</button></td>`)
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="editUser(this)">Edit</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal" id="${user.id}" onclick="deleteUser(this)" >Delete</button></td>`)
                 }
             })
     })
@@ -215,17 +215,18 @@
             return res;
         }
 
-    function updateUser(id) {
-        $.ajax({
-            url: "/rest/edit",
-            type: "PUT",
-            success: function (response) {
-                // console.log(response);
-                $('#target').html(response);
-                $('#editModal').modal('show');
-            }
-        });
-    }
+    // function updateUser(id) {
+    //     $.ajax({
+    //         url: "/rest/edit",
+    //         type: "PUT",
+    //         success: function (response) {
+    //             // console.log(response);
+    //             $('#target').html(response);
+    //             $('#editModal').modal('show');
+    //         }
+    //     });
+    // }
+
     function delUser(id) {
         $.ajax({
             url: "/admin/delete/" + id,
@@ -312,8 +313,9 @@
                 `)
             })
     }
-    async function editUser(id) {
-            await fetch('/rest/edit', {
+    async function editUser(butClick) {
+        let id = butClick.id
+        await fetch(`/rest/edit/${id}`, {
                 method : 'PUT'
             })
                 .then(response => response.json())
@@ -321,7 +323,7 @@
                     $('#myForm').val(result.id)
                     $('#username').val(result.username)
                     $('#password').val(result.password)
-                    $('#target').html(response);
+                    $('#target').html(result);
                     $('#editModal').modal('show');
                 })
                 .then(function (result) {
