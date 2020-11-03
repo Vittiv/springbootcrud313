@@ -57,27 +57,27 @@
 
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/admin/dashboard">Users table</a>
+                    <a id="usertable" class="nav-link active" onclick="userTable()">Users table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="/admin/newUser">New User</a>
+                    <a id="newuser" class="nav-link " onclick="createUser()">New User</a>
                 </li>
             </ul>
-            <table class="table ">
+            <table class="table " id="mainwindow">
                 <thead class="thead-light">
-                    <th scope="col">All users</th>
+                    <th scope="col" id="tablehead">All users</th>
                 </thead>
                 <tbody>
                     <div class="table-responsive">
                         <table class="table table-striped table-sm" id="table">
                             <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Age</th>
-                                <th>Email</th>
-                                <th>Role</th>
+                                <th id="thid">Id</th>
+                                <th id="thfirstName">First Name</th>
+                                <th id="thlastName">Last Name</th>
+                                <th id="thage">Age</th>
+                                <th id="thusername">Email</th>
+                                <th id="throle">Role</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -142,7 +142,7 @@
 <script>
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         fetch('/rest')
             .then(response => response.json())
             .then(result => {
@@ -166,46 +166,6 @@
                 }
             })
     })
-
-    // $.ajax({
-    //         url: "/rest",
-    //         dataType: 'json',
-    //         // data: this.data,
-    //         success: function (data) {
-    //             let html;
-    //             let id;
-    //
-    //             for (let i = 0; i < data.length; i++) {
-    //                 html += '<tr><td>' + data[i].id + '</td>' +
-    //                     '<td>' + data[i].firstName + '</td>' +
-    //                     '<td>' + data[i].lastName + '</td>' +
-    //                     '<td>' + data[i].age + '</td>' +
-    //                     '<td>' + data[i].username + '</td>' +
-    //                     '<td>' + parseRoles(data[i].roles) + '</td>' +
-    //                     '<td>' + `<button onclick="updateUser(id)" class="btn btn-primary btn-edit" id="edtBtn">Edit</button>` + '</td>' +
-    //                     '<td>' + `<button class="btn btn-danger btn-del">Delete</button>` + '</td>' +
-    //                     '</tr>';
-    //                 id = data[i].id;
-    //
-    //
-    //             }
-    //             $('#tablebody ').html(html);
-    //             // console.log(data);
-    //
-    //             $(function (data) {
-    //                 $('button').bind('click', function () {
-    //                     if ($(this).hasClass(".btn-edit")) {
-    //                         updateUser(data)
-    //                     }
-    //                     ;
-    //                     if ($(this).hasClass(".btn-del")) {
-    //                         delUser(data)
-    //                     }
-    //                 });
-    //             })
-    //         }
-    //     });
-    // })
 
         function parseRoles(roles) {
             let res = "";
@@ -236,7 +196,52 @@
             }
         });
     }
+    function userTable() {
+        $('#mainwindow').empty()
+        $('#tablehead').text('All users')
+        $('#newuser').removeClass('active')
+        $('#usertable').addClass('active')
+        $('#table').css('display', 'block')
+        $('#newusertable').css('display', 'none')
+        fetch('/rest')
+            .then(response => response.json())
+            .then(result => {
+                $('#tablebody').empty()
+                console.log(result)
+                for(let user of result){
+                    let roles = user.roles;
+                    let roleNew = "";
+                    for (let role of roles){
+                        roleNew = roleNew + role.name.substr(5) + " "
+                    }
+                    $('#tablebody').append(`<tr id="infoUsers"></tr>
+                    <td id="idUser">${user.id}</td>
+                    <td id="idUser">${user.firstName}</td>
+                    <td id="idUser">${user.lastName}</td>
+                    <td id="idUsername">${user.username}</td>
+                    <td id="idPassword">${user.age}</td>
+                    <td id="idRole">${roleNew}</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="editUser(this)">Edit</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal" id="${user.id}" onclick="deleteUser(this)" >Delete</button></td>`)
+                }
+            })
+    }
     async function createUser(){
+        $('#mainwindow').empty()
+        $('#tablehead').text('Add new user')
+        $('#newuser').addClass('active')
+        $('#usertable').removeClass('active')
+        $('#table').css('display', 'none')
+        $('#newusertable').css('display', 'block')
+        // $('#tablebody').append(`<tr id="infoUsers"></tr>
+        //             <td id="idUser"></td>
+        //             <td id="firstName"></td>
+        //             <td id="lastName"></td>
+        //             <td id="idUsername"></td>
+        //             <td id="idPassword"></td>
+        //             <td id="idRole"></td>
+        //             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal"  onclick="editUser(this)">Cancel</button></td>
+        //             <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"  onclick="">Save</button></td>`)
         const username = $('#usernameNew').val()
         const password = $('#passwordNew').val()
         let roles = $('#rolesNew').val()
@@ -248,12 +253,13 @@
             body: JSON.stringify({
                 name: username,
                 passwordArr: password,
-                rolesAll: roles
+                rolesAll: parseRoles(roles)
             })
         })
             .then(response => response.json())
             .then(result => {
-                $('#tablebody').empty()
+                $('#mainwindow').empty()
+
                 for(let user of result){
                     let roles = user.roles;
                     let roleNew = "";
@@ -262,11 +268,13 @@
                     }
                     $('#tablebody').append(`<tr id="infoUsers"></tr>
                     <td id="idUser">${user.id}</td>
+                    <td id="firstName">${user.firstName}</td>
+                    <td id="lastName">${user.lastName}</td>
                     <td id="idUsername">${user.username}</td>
                     <td id="idPassword">${user.password}</td>
                     <td id="idRole">${roleNew}</td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="editUser(this)">Edit</button></td>
-                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"  id="${user.id}" onclick="deleteUser(this)">Delete</button></td>`)
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="editUser(this)">Cancel</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"  id="${user.id}" onclick="">Save</button></td>`)
                 }
             })
     }
@@ -320,17 +328,27 @@
             })
                 .then(response => response.json())
                 .then(result => {
-                    $('#myForm').val(result.id)
-                    $('#username').val(result.username)
-                    $('#password').val(result.password)
-                    $('#target').html(result);
-                    $('#editModal').modal('show');
-                })
-                .then(function (result) {
-                    $('#target').html(result);
-                    $('#editModal').modal('show');
-                })
-    }
+                    $('#editModal').empty()
+                //     $('#editModal').append(`<tr id="infoUsers"></tr>
+                //     <td id="idUser">${result.id}</td>
+                //     <td id="idUser">${result.firstName}</td>
+                //     <td id="idUser">${result.lastName}</td>
+                //     <td id="idUsername">${result.username}</td>
+                //     <td id="idRole">${result.roles}</td>
+                //     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="dismiss">Cancel</button></td>
+                //     <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal" id="${user.id}" onclick="editUser(this)" >Save</button></td>`)
+                // })
+                //         `$('#id').val(result.id)
+                //     $('#username').val(result.username)
+                //     $('#password').val(result.password)`)
+                //     // $('#target').html(result);
+                //     // $('#editModal').modal('show');
+                // })
+                // .then(function (result) {
+                //     $('#target').html(result);
+                //     $('#editModal').modal('show');
+                // })
+    })}
 
 </script>
 </body>
