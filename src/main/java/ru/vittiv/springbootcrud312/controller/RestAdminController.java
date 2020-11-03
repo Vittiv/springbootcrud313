@@ -45,11 +45,18 @@ public class RestAdminController {
         return getJson(userService.getUserById(user.getId()));
     }
 
-    @GetMapping("/new")
+    @PostMapping("/new")
     public String addNewUser(@RequestBody User user) {
-        userService.updateUser(user);
-        List<User> usersList = userService.getAllUsers();
-        return getJson(usersList);
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setAge(user.getAge());
+        newUser.setRoles(user.getRoles());
+        userService.updateUser(newUser);
+//        List<User> usersList = userService.getAllUsers();
+        return getJson(newUser);
     }
     @PutMapping("/edit/{id}")
     public String editUser(@PathVariable("id") Long id) {

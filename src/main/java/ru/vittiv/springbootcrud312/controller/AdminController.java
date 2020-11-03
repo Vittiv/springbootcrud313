@@ -65,19 +65,19 @@ public class AdminController {
         return "admin/editUser";
     }
 
-    @PostMapping("/editSave")
-    public String editUser(@ModelAttribute User user,
-                           @RequestParam("role") String[] role
-                           ) {
-        // TODO Перенести в модель User, создав конструктор для String[] role
-        Set<Role> roleSet = new HashSet<>();
-        for (String roles : role) {
-            roleSet.add(userService.getRoleByName(roles));
-        }
-        user.setRoles(roleSet);
-        userService.updateUser(user);
-        return "redirect:dashboard";
-    }
+//    @PostMapping("/editSave")
+//    public String editUser(@ModelAttribute User user,
+//                           @RequestParam("role") String[] role
+//                           ) {
+//        // TODO Перенести в модель User, создав конструктор для String[] role
+//        Set<Role> roleSet = new HashSet<>();
+//        for (String roles : role) {
+//            roleSet.add(userService.getRoleByName(roles));
+//        }
+//        user.setRoles(roleSet);
+//        userService.updateUser(user);
+//        return "redirect:dashboard";
+//    }
 
     //
     @PostMapping("/delete")

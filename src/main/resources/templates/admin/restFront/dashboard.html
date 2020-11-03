@@ -97,7 +97,7 @@
             <div class="container" style="display: none" id="newuserform">
                 <div class="row justify-content-center align-items-center">
                     <div>
-                        <form action="editSave" method="post">
+                        <form action="#" >
                             <div class=" form-control-sm text-center font-weight-bold">
                                 <div class="form-group  my-1">
                                     <label for="firstName" class="col-form-label">First name</label>
@@ -122,7 +122,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success">Add new user</button>
+                                    <button id="btnAddUser" type="submit" class="btn btn-success">Add new user</button>
                                 </div>
                             </div>
                         </form>
@@ -261,7 +261,7 @@
                 }
             })
     }
-    async function createUser(){
+    function createUser() {
         $('#mainwindow').empty()
         $('#tablehead').text('Add new user')
         $('#newuser').addClass('active')
@@ -277,31 +277,40 @@
         //             <td id="idRole"></td>
         //             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal"  onclick="editUser(this)">Cancel</button></td>
         //             <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"  onclick="">Save</button></td>`)
-        const username = $('#username').val()
-        const password = $('#password').val()
-        let roles = $('#role').val()
-        await   fetch("/rest/new", {
-            method : 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({
-                name: username,
-                passwordArr: password,
-                rolesAll: roles
-            })
-        })
-            .then(response => response.json())
-            .then(result => {
-                $('#mainwindow').empty()
 
-                for(let user of result){
-                    let roles = user.roles;
-                    let roleNew = "";
-                    for (let role of roles){
-                        roleNew = roleNew + role.name.substr(5) + " "
-                    }
-                    $('#tablebody').append(`<tr id="infoUsers"></tr>
+
+        $('#btnAddUser').on('click', async function saveNewUser() {
+            const username = $('#username').val()
+            const password = $('#password').val()
+            const firstName = $('#firstName').val()
+            const lastName = $('#lastName').val()
+            const age = $('#age').val()
+            let role = $('#role').val()
+            await fetch("/rest/new", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    firstName:firstName,
+                    lastName: lastName,
+                    age: age,
+                    roles: role
+                })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    $('#mainwindow').empty()
+
+                    for (let user of result) {
+                        let roles = user.roles;
+                        let roleNew = "";
+                        for (let role of roles) {
+                            roleNew = roleNew + role.name.substr(5) + " "
+                        }
+                        $('#tablebody').append(`<tr id="infoUsers"></tr>
                     <td id="idUser">${user.id}</td>
                     <td id="firstName">${user.firstName}</td>
                     <td id="lastName">${user.lastName}</td>
@@ -310,8 +319,9 @@
                     <td id="idRole">${roleNew}</td>
                     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="editUser(this)">Cancel</button></td>
                     <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"  id="${user.id}" onclick="">Save</button></td>`)
-                }
-            })
+                    }
+                })
+        })
     }
 
     function deleteUser(butClick){
