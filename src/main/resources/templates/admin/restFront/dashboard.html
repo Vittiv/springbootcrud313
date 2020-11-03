@@ -94,6 +94,41 @@
                     </div>
                 </tbody>
             </table>
+            <div class="container" style="display: none" id="newuserform">
+                <div class="row justify-content-center align-items-center">
+                    <div>
+                        <form action="editSave" method="post">
+                            <div class=" form-control-sm text-center font-weight-bold">
+                                <div class="form-group  my-1">
+                                    <label for="firstName" class="col-form-label">First name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
+
+                                    <label for="lastName" class="col-form-label">Last name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name">
+
+                                    <label for="age" class="col-form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="age" placeholder="Age">
+
+                                    <label for="username" class="col-form-label">Email</label>
+                                    <input type="email" class="form-control" id="username" name="username" placeholder="Email">
+
+                                    <label for="password" class="col-form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+
+                                    <label for="role" class="col-form-label">Role</label>
+                                    <select multiple size="2" class="form-control" id="role" name="role">
+                                        <option value="ROLE_ADMIN">ADMIN</option>
+                                        <option value="ROLE_USER" th:default="ROLE_USER">USER</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">Add new user</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </main>
         </div>
     </div>
@@ -202,7 +237,7 @@
         $('#newuser').removeClass('active')
         $('#usertable').addClass('active')
         $('#table').css('display', 'block')
-        $('#newusertable').css('display', 'none')
+        $('#newuserform').css('display', 'none')
         fetch('/rest')
             .then(response => response.json())
             .then(result => {
@@ -232,7 +267,7 @@
         $('#newuser').addClass('active')
         $('#usertable').removeClass('active')
         $('#table').css('display', 'none')
-        $('#newusertable').css('display', 'block')
+        $('#newuserform').css('display', 'block')
         // $('#tablebody').append(`<tr id="infoUsers"></tr>
         //             <td id="idUser"></td>
         //             <td id="firstName"></td>
@@ -242,9 +277,9 @@
         //             <td id="idRole"></td>
         //             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal"  onclick="editUser(this)">Cancel</button></td>
         //             <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"  onclick="">Save</button></td>`)
-        const username = $('#usernameNew').val()
-        const password = $('#passwordNew').val()
-        let roles = $('#rolesNew').val()
+        const username = $('#username').val()
+        const password = $('#password').val()
+        let roles = $('#role').val()
         await   fetch("/rest/new", {
             method : 'POST',
             headers: {
@@ -253,7 +288,7 @@
             body: JSON.stringify({
                 name: username,
                 passwordArr: password,
-                rolesAll: parseRoles(roles)
+                rolesAll: roles
             })
         })
             .then(response => response.json())
