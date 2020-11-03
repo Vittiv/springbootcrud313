@@ -16,7 +16,7 @@
         <a class="navbar-item text-light">
                 <span class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]
                     <span class="text-light">with role </span>
-                     <span th:text="${userRoles}"></span>
+<!--                     <span th:text="${userRoles}"></span>-->
 <!--                    <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">-->
 <!--                        <span sec:authentication="principal.authorities"></span>-->
 <!--                    </span>-->
@@ -117,22 +117,7 @@
             data: this.data,
             success: function (data) {
                 let html;
-                const editBtn = document.createElement("BUTTON");
-                editBtn.type = 'button';
-                editBtn.className = 'btn btn-primary';
-                editBtn.innerHTML = "Edit"; // для наглядности
-                editBtn.addEventListener('click', function() {
-                    updateUser(data[i].id);
-                    return false;
-                });
-                const deleteBtn = document.createElement("BUTTON");
-                deleteBtn.type = 'button';
-                deleteBtn.className = 'btn btn-danger';
-                deleteBtn.innerHTML = "Delete"; // для наглядности
-                deleteBtn.addEventListener('click', function() {
-                    delUser(data[i].id);
-                    return false;
-                });
+
                 for (let i = 0; i < data.length; i++) {
                     html += '<tr><td>' + data[i].id + '</td>' +
                         '<td>' + data[i].firstName + '</td>' +

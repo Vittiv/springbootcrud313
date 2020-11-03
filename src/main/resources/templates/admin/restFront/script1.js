@@ -28,7 +28,7 @@ $(document).ready(function () {
 
 
 function editUser() {
-    $.ajax("/rest/admin/edit", {
+    $.ajax("/rest/edit", {
         method: "post",
         data:
             {

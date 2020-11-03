@@ -51,15 +51,16 @@ public class RestAdminController {
         return getJson(usersList);
     }
     @PutMapping("/edit")
-    public String editUser(@RequestBody User user) {
+    public String editUser(@RequestBody Long id) {
+        User user = userService.getUserById(id);
         userService.updateUser(user);
         List<User> usersList = userService.getAllUsers();
         return getJson(usersList);
     }
 
-    @DeleteMapping("/delete")
-    public String deleteUser(@RequestBody User user) {
-        userService.deleteUser(user.getId());
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@RequestBody Long id) {
+        userService.deleteUser(id);
         List<User> usersList = userService.getAllUsers();
         return getJson(usersList);
     }

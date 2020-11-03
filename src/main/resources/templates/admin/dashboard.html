@@ -23,7 +23,8 @@
                 <span class="text-light">with role </span>
 <!--                <span th:inline="text" class="text-light" sec:authorize="isAuthenticated()">-->
 <!--                <span sec:authentication="principal.authorities"></span> -->
-                <span th:text="${userRoles}"></span> </span>
+<!--                <span th:text="${userRoles}"></span> -->
+            </span>
             </span>
         </a>
         <form class="form-inline" th:action="@{/logout}" method="POST">
@@ -82,25 +83,25 @@
                                 <th>Delete</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <th:block th:each="user : ${users}">
-                                <tr>
-                                    <td th:text="${user.id}"></td>
-                                    <td th:text="${user.firstName}"></td>
-                                    <td th:text="${user.lastName}"></td>
-                                    <td th:text="${user.age}"></td>
-                                    <td th:text="${user.username}"></td>
-<!--                                    <td th:text="${userRoles}"></td>-->
-                                    <td th:text="${user.getRolesString()}"></td>
-<!--                                    <td id="edituserbutton">-->
-<!--                                        <a class="btn btn-primary eBtn" data-toggle="modal" data-target="#editModal" data-user="${user}">Edit</a>-->
-                                    <td ><button type="button" class="btn btn-primary"  th:onclick="'javascript:updateUser(\'' + ${user.getId()} +'\');'">Edit</button></td>
+                            <tbody id = maintable>
+<!--                            <th:block th:each="user : ${users}">-->
+<!--                                <tr>-->
+<!--                                    <td th:text="${user.id}"></td>-->
+<!--                                    <td th:text="${user.firstName}"></td>-->
+<!--                                    <td th:text="${user.lastName}"></td>-->
+<!--                                    <td th:text="${user.age}"></td>-->
+<!--                                    <td th:text="${user.username}"></td>-->
+<!--&lt;!&ndash;                                    <td th:text="${userRoles}"></td>&ndash;&gt;-->
+<!--                                    <td th:text="${user.getRolesString()}"></td>-->
+<!--&lt;!&ndash;                                    <td id="edituserbutton">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <a class="btn btn-primary eBtn" data-toggle="modal" data-target="#editModal" data-user="${user}">Edit</a>&ndash;&gt;-->
+<!--                                    <td ><button type="button" class="btn btn-primary"  th:onclick="'javascript:updateUser(\'' + ${user.getId()} +'\');'">Edit</button></td>-->
+<!--&lt;!&ndash;                                    </td>&ndash;&gt;-->
+<!--                                    <td>&nbsp;&nbsp;&nbsp;-->
+<!--                                        <button type="button" class="btn btn-danger"  th:onclick="'javascript:delUser(\'' + ${user.getId()} +'\');'">Delete</button>-->
 <!--                                    </td>-->
-                                    <td>&nbsp;&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-danger"  th:onclick="'javascript:delUser(\'' + ${user.getId()} +'\');'">Delete</button>
-                                    </td>
-                                </tr>
-                            </th:block>
+<!--                                </tr>-->
+<!--                            </th:block>-->
                             </tbody>
                         </table>
                     </div>
@@ -152,6 +153,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
+
+
     function updateUser(id) {
         $.ajax({
             url: "/admin/updates/" + id,

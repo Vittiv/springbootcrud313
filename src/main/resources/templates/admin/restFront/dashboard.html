@@ -49,7 +49,6 @@
                     </li>
                 </ul>
 
-<!--                </ul>-->
             </div>
         </nav>
 
@@ -141,9 +140,85 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script>
+
+
+    $(document).ready(function() {
+        fetch('/rest')
+            .then(response => response.json())
+            .then(result => {
+                $('#tablebody').empty()
+                console.log(result)
+                for(let user of result){
+                    let roles = user.roles;
+                    let roleNew = "";
+                    for (let role of roles){
+                        roleNew = roleNew + role.name.substr(5) + " "
+                    }
+                    $('#tablebody').append(`<tr id="infoUsers"></tr>
+                    <td id="idUser">${user.id}</td>
+                    <td id="idUser">${user.firstName}</td>
+                    <td id="idUser">${user.lastName}</td>
+                    <td id="idUsername">${user.username}</td>
+                    <td id="idPassword">${user.age}</td>
+                    <td id="idRole">${roleNew}</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="updateUser(${user.id})">Edit</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal" id="${user.id}" onclick="deleteUser(${user.id})" >Delete</button></td>`)
+                }
+            })
+    })
+
+    // $.ajax({
+    //         url: "/rest",
+    //         dataType: 'json',
+    //         // data: this.data,
+    //         success: function (data) {
+    //             let html;
+    //             let id;
+    //
+    //             for (let i = 0; i < data.length; i++) {
+    //                 html += '<tr><td>' + data[i].id + '</td>' +
+    //                     '<td>' + data[i].firstName + '</td>' +
+    //                     '<td>' + data[i].lastName + '</td>' +
+    //                     '<td>' + data[i].age + '</td>' +
+    //                     '<td>' + data[i].username + '</td>' +
+    //                     '<td>' + parseRoles(data[i].roles) + '</td>' +
+    //                     '<td>' + `<button onclick="updateUser(id)" class="btn btn-primary btn-edit" id="edtBtn">Edit</button>` + '</td>' +
+    //                     '<td>' + `<button class="btn btn-danger btn-del">Delete</button>` + '</td>' +
+    //                     '</tr>';
+    //                 id = data[i].id;
+    //
+    //
+    //             }
+    //             $('#tablebody ').html(html);
+    //             // console.log(data);
+    //
+    //             $(function (data) {
+    //                 $('button').bind('click', function () {
+    //                     if ($(this).hasClass(".btn-edit")) {
+    //                         updateUser(data)
+    //                     }
+    //                     ;
+    //                     if ($(this).hasClass(".btn-del")) {
+    //                         delUser(data)
+    //                     }
+    //                 });
+    //             })
+    //         }
+    //     });
+    // })
+
+        function parseRoles(roles) {
+            let res = "";
+            for (let i = 0; i < roles.length; i++) {
+                res += roles[i].name.substr(5) + " ";
+            }
+            return res;
+        }
+
     function updateUser(id) {
         $.ajax({
-            url: "/admin/updates/" + id,
+            url: "/rest/edit",
+            type: "PUT",
             success: function (response) {
                 // console.log(response);
                 $('#target').html(response);
@@ -160,113 +235,100 @@
             }
         });
     }
+    async function createUser(){
+        const username = $('#usernameNew').val()
+        const password = $('#passwordNew').val()
+        let roles = $('#rolesNew').val()
+        await   fetch("/rest/new", {
+            method : 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                name: username,
+                passwordArr: password,
+                rolesAll: roles
+            })
+        })
+            .then(response => response.json())
+            .then(result => {
+                $('#tablebody').empty()
+                for(let user of result){
+                    let roles = user.roles;
+                    let roleNew = "";
+                    for (let role of roles){
+                        roleNew = roleNew + role.name.substr(5) + " "
+                    }
+                    $('#tablebody').append(`<tr id="infoUsers"></tr>
+                    <td id="idUser">${user.id}</td>
+                    <td id="idUsername">${user.username}</td>
+                    <td id="idPassword">${user.password}</td>
+                    <td id="idRole">${roleNew}</td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" id="${user.id}" onclick="editUser(this)">Edit</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"  id="${user.id}" onclick="deleteUser(this)">Delete</button></td>`)
+                }
+            })
+    }
 
-    $(document).ready(function() {
-        $.ajax({
-            url: "/rest",
-            dataType: 'json',
-            data: this.data,
-            success: function (data) {
-                let html;
-                const editBtn = document.createElement("BUTTON");
-                editBtn.type = 'button';
-                editBtn.className = 'btn btn-primary';
-                editBtn.innerHTML = "Edit"; // для наглядности
-                editBtn.addEventListener('click', function() {
-                    updateUser(data[i].id);
-                    return false;
-                });
-                const deleteBtn = document.createElement("BUTTON");
-                deleteBtn.type = 'button';
-                deleteBtn.className = 'btn btn-danger';
-                deleteBtn.innerHTML = "Delete"; // для наглядности
-                deleteBtn.addEventListener('click', function() {
-                    delUser(data[i].id);
-                    return false;
-                });
-                for (let i = 0; i < data.length; i++) {
-                   html += '<tr><td>' + data[i].id + '</td>' +
-                        '<td>' + data[i].firstName + '</td>' +
-                        '<td>' + data[i].lastName + '</td>' +
-                        '<td>' + data[i].age + '</td>' +
-                        '<td>' + data[i].username + '</td>' +
-                        '<td>' + parseRoles(data[i].roles) + '</td>' +
-                       '<td>' + `<button onclick="updateUser(data[i].id)" class="btn btn-primary">Edit</button>` + '</td>' +
-                       '<td>' + `<button onclick="delUser(data[i].id)" class="btn btn-danger">Delete</button>` + '</td>' +
-                       '</tr>';
+    function deleteUser(butClick){
+        let id = butClick.id
+        fetch(`/rest/delete/${id}`, {
+            method : 'DELETE'
+        })
+            .then(response => response.json())
+            .then(result => {
+                $('#targetDel').empty()
+                let roles = result.roles;
+                let roleNew = "";
+                for (let role of roles){
+                    roleNew = roleNew + role.name.substr(5) + " "
 
                 }
-                $('#tablebody').html(html);
-                // console.log(data);
-            }
-        })
-    });
-
-    function parseRoles(roles) {
-        let res = "";
-        for (let i = 0; i < roles.length; i++) {
-            res += roles[i].name.substr(5) + " ";
-        }
-        return res;
+                $('#targetDel').append(`
+                <form>
+                    <fieldset disabled>
+                        <div class="form-group">
+                            <label for="idDel">Id</label>
+                            <input type="text" value="${result.id}" class="form-control" id="idDel" placeholder="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="userameDel">Username</label>
+                            <input type="text" value="${result.username}" class="form-control" id="userameDel" placeholder="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordDel">Password</label>
+                            <input type="text" value="${result.password}" class="form-control" id="passwordDel" placeholder="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="roleDel">Role</label>
+                            <input type="text" value="${roleNew}" class="form-control" id="roleDel" placeholder="role">
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="${result.id}" onclick="deleteResult(this)">Delete</button>
+                    </div>
+                </form>
+                `)
+            })
     }
-            // .done(function() {
-            // $( this ).addClass( "done" );
-        // }); showUsers() {
-        // var xhttp;
-        // // if (data == "") {
-        // //     document.getElementById("tablebody").innerHTML = "";
-        // //     return;
-        // // }
-        // xhttp = new XMLHttpRequest();
-        // xhttp.onreadystatechange = function() {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         document.getElementById("tablebody").innerHTML = this.responseText;
-        //     }
-        // };
-        // xhttp.open("GET", "/rest", true);
-        // xhttp.send();
-    // })
-
-    // function drawTable(data) {
-    //     var html = '';
-    //     for (var i = 0; i < data.length; i++) {
-    //         html += '<tr><td>' + data[i].id + '</td>' +
-    //             '<td>' + data[i].firstName + '</td>' +
-    //             '<td>' + data[i].lastName + '</td>' +
-    //             '<td>' + data[i].age + '</td>' +
-    //             '<td>' + data[i].username + '</td>' +
-    //             '<td>' + data[i].password + '</td>' +
-    //             '<td>' + data[i].roles + '</td></tr>';
-    //     }
-    //     $('#table tbody').append(html);
-    // }
-    //
-    // function fillTable(data) {
-    //     let r = new Array(), j = -1;
-    //     for (let key=0, size=data.length; key<size; key++){
-    //         r[++j] ='<tr><td>';
-    //         r[++j] = data[key][0];
-    //         r[++j] = '</td><td class="whatever1">';
-    //         r[++j] = data[key][1];
-    //         r[++j] = '</td><td class="whatever2">';
-    //         r[++j] = data[key][2];
-    //         r[++j] = '</td></tr>';
-    //     }
-    //     $('#dataTable')[0].innerHTML = r.join('');
-    // }
-
-    // function fillTable1(response) {
-    //     let html = $.map(response.d, function (data, i) {
-    //         return "<tr><td>" + data[i].firstName + "</td>" +
-    //             "<td>" + data[i].lastName + "</td>" +
-    //             "<td>" + data[i].age + "</td>" +
-    //             "<td>" + data[i].username + "</td>" +
-    //             "<td>" + data[i].password + "</td>" +
-    //             "<td>" + data[i].roles + "</td></tr>";
-    //     }).join("");
-    //     console.log(html);
-    //     $("#tablebody").append(html);
-    // }
+    async function editUser(id) {
+            await fetch('/rest/edit', {
+                method : 'PUT'
+            })
+                .then(response => response.json())
+                .then(result => {
+                    $('#myForm').val(result.id)
+                    $('#username').val(result.username)
+                    $('#password').val(result.password)
+                    $('#target').html(response);
+                    $('#editModal').modal('show');
+                })
+                .then(function (result) {
+                    $('#target').html(result);
+                    $('#editModal').modal('show');
+                })
+    }
 
 </script>
 </body>
